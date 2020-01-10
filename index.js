@@ -29,6 +29,8 @@ mongoose.connect(process.env.MONGODB_URI, {
 mongoose.set("debug", process.env.NODE_ENV !== "production");
 
 // add routes
+require("./routes/driver.route")(app);
+require("./routes/delivery.route")(app);
 require("./routes/device.route")(app);
 require("./routes/location.route")(app);
 require("./routes/trip.route")(app);
