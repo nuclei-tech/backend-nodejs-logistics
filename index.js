@@ -41,7 +41,7 @@ require("./routes/push-notification.route")(app);
 require("./routes/device-push-info.route")(app);
 
 // welcome URL for Heroku
-app.get("/", (req, res) => res.send("HyperTrack Placeline Backend is RUNNING"));
+app.get("/", (req, res) => res.send("HyperTrack Logistics Backend is RUNNING"));
 
 // start server
 http.listen(process.env.PORT || 8080, function() {
