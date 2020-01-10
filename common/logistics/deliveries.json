@@ -11,20 +11,18 @@
       "country": "USA"
     },
     "customerNote": "Leave at the reception on floor 8th",
-    "items": {
-      "type": [
-        {
-          "item_id": "ABC123",
-          "item_label": "Amazon-A",
-          "item_sku": "ADJW38DJR287"
-        },
-        {
-          "item_id": "DEF456",
-          "item_label": "Amazon-B",
-          "item_sku": "GKI1643XJW"
-        }
-      ]
-    }
+    "items": [
+      {
+        "item_id": "ABC123",
+        "item_label": "Amazon-A",
+        "item_sku": "ADJW38DJR287"
+      },
+      {
+        "item_id": "DEF456",
+        "item_label": "Amazon-B",
+        "item_sku": "GKI1643XJW"
+      }
+    ]
   },
   {
     "delivery_id": "2",
@@ -38,20 +36,18 @@
       "country": "USA"
     },
     "customerNote": "Ring my phone so I can pick it up: 4155109422",
-    "items": {
-      "type": [
-        {
-          "item_id": "AAA",
-          "item_label": "Amazon-C",
-          "item_sku": "ASNWKE2916DJK"
-        },
-        {
-          "item_id": "BBB",
-          "item_label": "Amazon-D",
-          "item_sku": "SNRKCVO59327CS"
-        }
-      ]
-    }
+    "items": [
+      {
+        "item_id": "AAA",
+        "item_label": "Amazon-C",
+        "item_sku": "ASNWKE2916DJK"
+      },
+      {
+        "item_id": "BBB",
+        "item_label": "Amazon-D",
+        "item_sku": "SNRKCVO59327CS"
+      }
+    ]
   },
   {
     "delivery_id": "3",
@@ -64,14 +60,12 @@
       "city": "San Francisco",
       "country": "USA"
     },
-    "items": {
-      "type": [
-        {
-          "item_id": "HJK",
-          "item_label": "BestBuy",
-          "item_sku": "283SJKCRJ385"
-        }
-      ]
-    }
+    "items": [
+      {
+        "item_id": "HJK",
+        "item_label": "BestBuy",
+        "item_sku": "283SJKCRJ385"
+      }
+    ]
   }
 ]

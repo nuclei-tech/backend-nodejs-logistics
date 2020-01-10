@@ -15,7 +15,7 @@ function initLogisticsSamples() {
     request({
       url: `${API_URL}/logistics/drivers`,
       method: "POST",
-      json: sampleDrivers[i] //
+      json: sampleDrivers[i]
     });
   }
 

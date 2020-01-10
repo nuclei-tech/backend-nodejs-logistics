@@ -20,9 +20,9 @@ exports.addOne = (req, res) => {
     .then(() => {
       res.status(201).send("Driver created successfully");
     })
-    .catch(() => {
+    .catch(err => {
       return res.status(500).send({
-        message: "Error creating driver: " + req.body
+        message: "Error creating driver: " + err
       });
     });
 };
