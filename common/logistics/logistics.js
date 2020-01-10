@@ -13,7 +13,7 @@ function initLogisticsSamples() {
   for (let i = 0; i < sampleDrivers.length; i++) {
     console.log(`Add sample driver "${sampleDrivers[i].driver_id}"...`);
     request({
-      url: `${API_URL}/drivers`,
+      url: `${API_URL}/logistics/drivers`,
       method: "POST",
       json: sampleDrivers[i] //
     });
@@ -23,7 +23,7 @@ function initLogisticsSamples() {
   for (let i = 0; i < sampleDeliveries.length; i++) {
     console.log(`Add sample delivery "${sampleDeliveries[i].delivery_id}"...`);
     request({
-      url: `${API_URL}/deliveries`,
+      url: `${API_URL}/logistics/deliveries`,
       method: "POST",
       json: sampleDeliveries[i]
     });
