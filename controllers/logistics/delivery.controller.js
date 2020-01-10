@@ -1,4 +1,4 @@
-const Delivery = require("../models/delivery.model");
+const Delivery = require("../../models/logistics/delivery.model");
 
 // Retrieve and return all deliveries from the database.
 exports.findAll = (req, res) => {
@@ -10,6 +10,19 @@ exports.findAll = (req, res) => {
       res.status(500).send({
         message:
           err.message || "Some error occurred while retrieving deliveries."
+      });
+    });
+};
+
+// Add a new delivery
+exports.addOne = (req, res) => {
+  Delivery.create(req.body)
+    .then(() => {
+      res.status(201).send("Delivery created successfully");
+    })
+    .catch(() => {
+      return res.status(500).send({
+        message: "Error creating delivery: " + req.body
       });
     });
 };

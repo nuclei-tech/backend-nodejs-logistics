@@ -1,4 +1,4 @@
-const Driver = require("../models/driver.model");
+const Driver = require("../../models/logistics/driver.model");
 
 // TODO: Retrieve and return all drivers from the database.
 exports.findAll = (req, res) => {
@@ -10,6 +10,19 @@ exports.findAll = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message: err.message || "Some error occurred while retrieving drivers."
+      });
+    });
+};
+
+// Add a new driver
+exports.addOne = (req, res) => {
+  Driver.create(req.body)
+    .then(() => {
+      res.status(201).send("Driver created successfully");
+    })
+    .catch(() => {
+      return res.status(500).send({
+        message: "Error creating driver: " + req.body
       });
     });
 };

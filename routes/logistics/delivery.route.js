@@ -1,8 +1,11 @@
 module.exports = app => {
-  const deliveries = require("../controllers/delivery.controller");
+  const deliveries = require("../../controllers/logistics/delivery.controller");
 
   // Retrieve all devices
   app.get("/logistics/deliveries", deliveries.findAll);
+
+  // Add a new device status update
+  app.post("/logistics/deliveries", deliveries.addOne);
 
   // Retrieve a single delivery with delivery_id
   app.get("/logistics/deliveries/:delivery_id", deliveries.findOne);

@@ -7,6 +7,10 @@ const DeliverySchema = new mongoose.Schema(
       type: String,
       required: true
     },
+    driver_id: {
+      type: String,
+      required: true
+    },
     status: {
       type: String,
       required: true,

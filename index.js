@@ -8,6 +8,7 @@ var mongoose = require("mongoose");
 
 var { updateAllDevices } = require("./common/devices");
 var { updateAllTrips } = require("./common/trips");
+var { initLogisticsSamples } = require("./common/logistics/logistics");
 
 // setup express
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -29,8 +30,8 @@ mongoose.connect(process.env.MONGODB_URI, {
 mongoose.set("debug", process.env.NODE_ENV !== "production");
 
 // add routes
-require("./routes/driver.route")(app);
-require("./routes/delivery.route")(app);
+require("./routes/logistics/driver.route")(app);
+require("./routes/logistics/delivery.route")(app);
 require("./routes/device.route")(app);
 require("./routes/location.route")(app);
 require("./routes/trip.route")(app);
@@ -48,6 +49,9 @@ app.get("/", (req, res) => res.send("HyperTrack Logistics Backend is RUNNING"));
 // start server
 http.listen(process.env.PORT || 8080, function() {
   console.log(`listening on *:${process.env.PORT || 8080}`);
+
+  // logistics setup
+  initLogisticsSamples();
 
   // update all devices in DB using HyperTrack API
   updateAllDevices();
