@@ -2,6 +2,7 @@
   {
     "driver_id": "AG",
     "name": "Alex's Phone",
-    "device_id": "ABC-123"
+    "device_id": "ABC-123",
+    "token": ""
   }
 ]

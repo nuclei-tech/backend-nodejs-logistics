@@ -4,12 +4,15 @@ module.exports = app => {
   // Retrieve all drivers
   app.get("/logistics/drivers", drivers.findAll);
 
-  // Add a new device status update
+  // Add a new driver
   app.post("/logistics/drivers", drivers.addOne);
+
+  // Update an existing driver
+  app.patch("/logistics/drivers", drivers.findOneAndUpdate);
 
   // Retrieve a single driver with driver_id
   app.get("/logistics/drivers/:driver_id", drivers.findOne);
 
   // Check in a single driver using driver_id
-  app.get("/logistics/drivers/:driver_id/checkin", drivers.findOneAndCheckin);
+  app.post("/logistics/drivers/:driver_id/checkin", drivers.findOneAndCheckin);
 };

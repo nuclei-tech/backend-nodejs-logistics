@@ -18,6 +18,9 @@ const DriverSchema = new mongoose.Schema(
     active_trip: {
       type: String
     },
+    token: {
+      type: String
+    },
     updatedAt: {
       type: Date
     },

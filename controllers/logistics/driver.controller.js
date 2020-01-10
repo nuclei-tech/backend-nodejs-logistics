@@ -56,3 +56,14 @@ exports.findOne = (req, res) => {
 exports.findOneAndCheckin = (req, res) => {
   res.status(500).send("Not implemented");
 };
+
+// Update a driver using driver_id
+exports.findOneAndUpdate = (req, res) => {
+  updateDelviery(req.params.driver_id, req.body, (driver, error) => {
+    if (error) {
+      res.status(500).send(error);
+    } else {
+      res.send(driver);
+    }
+  });
+};
