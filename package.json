@@ -1,0 +1,37 @@
+{
+  "name": "backend-nodejs",
+  "description": "Sample NodeJS server integration for Placeline application",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js & lt --subdomain hypertrack-backend-sample --port 8080 --open"
+  },
+  "author": "Alexander Graebe <agraebe@hypertrack.com>",
+  "license": "MIT",
+  "keywords": [
+    "sample",
+    "hypertrack",
+    "placeline",
+    "integration",
+    "mongodb",
+    "mongoose",
+    "heroku"
+  ],
+  "engines": {
+    "node": "10.x"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "localtunnel": "^2.0.0",
+    "mongoose": "^5.8.0",
+    "node-pushnotifications": "^1.2.0",
+    "nodemon": "^2.0.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.5",
+    "socket.io": "^2.3.0"
+  }
+}
