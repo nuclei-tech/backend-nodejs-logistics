@@ -21,6 +21,9 @@ const DriverSchema = new mongoose.Schema(
     token: {
       type: String
     },
+    deliveries: {
+      type: [Object]
+    },
     updatedAt: {
       type: Date
     },

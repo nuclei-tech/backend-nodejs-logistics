@@ -1,10 +1,19 @@
 const Driver = require("../../models/logistics/driver.model");
+const Delivery = require("../../models/logistics/delivery.model");
 
 // Retrieve and return all drivers from the database.
 exports.findAll = (req, res) => {
   Driver.find()
-    .then(drivers => {
-      //TODO: Add deliveries to driver objects
+    .then(async drivers => {
+      // Add deliveries to driver objects
+      for (let i = 0; i < drivers.length; i++) {
+        const { driver_id } = drivers[i];
+        const resp = await Delivery.find({ driver_id });
+        if (resp) {
+          drivers[i].deliveries = resp;
+        }
+      }
+
       res.send(drivers);
     })
     .catch(err => {
@@ -30,14 +39,19 @@ exports.addOne = (req, res) => {
 // Find a single driver with a driver_id
 exports.findOne = (req, res) => {
   Driver.findOne({ driver_id: req.params.driver_id })
-    .then(driver => {
+    .then(async driver => {
       if (!driver) {
         return res.status(404).send({
           message: "Driver not found with id " + req.params.driver_id
         });
       }
 
-      //TODO: Add deliveries to driver objects
+      // Add deliveries to driver
+      const resp = await Delivery.find({ driver_id: driver.driver_id });
+      if (resp) {
+        driver.deliveries = resp;
+      }
+
       res.send(driver);
     })
     .catch(err => {
