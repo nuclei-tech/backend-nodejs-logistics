@@ -1,10 +1,10 @@
 module.exports = app => {
   const deliveries = require("../../controllers/logistics/delivery.controller");
 
-  // Retrieve all devices
+  // Retrieve all deliveries
   app.get("/logistics/deliveries", deliveries.findAll);
 
-  // Add a new device status update
+  // Add a new delivery
   app.post("/logistics/deliveries", deliveries.addOne);
 
   // Retrieve a single delivery with delivery_id

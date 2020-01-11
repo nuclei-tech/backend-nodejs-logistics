@@ -8,7 +8,7 @@ module.exports = app => {
   app.post("/logistics/drivers", drivers.addOne);
 
   // Update an existing driver
-  app.patch("/logistics/drivers", drivers.findOneAndUpdate);
+  app.patch("/logistics/drivers/:driver_id", drivers.findOneAndUpdate);
 
   // Retrieve a single driver with driver_id
   app.get("/logistics/drivers/:driver_id", drivers.findOne);
