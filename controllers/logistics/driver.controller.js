@@ -1,6 +1,6 @@
 const Driver = require("../../models/logistics/driver.model");
 
-// TODO: Retrieve and return all drivers from the database.
+// Retrieve and return all drivers from the database.
 exports.findAll = (req, res) => {
   Driver.find()
     .then(drivers => {
@@ -27,7 +27,7 @@ exports.addOne = (req, res) => {
     });
 };
 
-// TODO: Find a single driver with a driver_id
+// Find a single driver with a driver_id
 exports.findOne = (req, res) => {
   Driver.findOne({ driver_id: req.params.driver_id })
     .then(driver => {
