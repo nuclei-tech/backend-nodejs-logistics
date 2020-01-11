@@ -52,7 +52,7 @@ exports.findOne = (req, res) => {
 
 // Update a delivery using delivery_id
 exports.findOneAndUpdate = (req, res) => {
-  updateDelviery(req.params.delivery_id, req.body, (delivery, error) => {
+  this.updateDelviery(req.params.delivery_id, req.body, (delivery, error) => {
     if (error) {
       res.status(500).send(error);
     } else {
@@ -63,7 +63,7 @@ exports.findOneAndUpdate = (req, res) => {
 
 // Mark a delivery as completed using delivery_id
 exports.findOneAndComplete = (req, res) => {
-  updateDelviery(
+  this.updateDelviery(
     req.params.delivery_id,
     { status: "completed" },
     (delivery, error) => {
@@ -78,7 +78,7 @@ exports.findOneAndComplete = (req, res) => {
 
 // Mark a delivery as visited using delivery_id
 exports.findOneAndVisit = (req, res) => {
-  updateDelviery(
+  this.updateDelviery(
     req.params.delivery_id,
     { status: "visited" },
     (delivery, error) => {

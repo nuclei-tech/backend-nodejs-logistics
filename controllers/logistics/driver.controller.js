@@ -59,11 +59,27 @@ exports.findOneAndCheckin = (req, res) => {
 
 // Update a driver using driver_id
 exports.findOneAndUpdate = (req, res) => {
-  updateDelviery(req.params.driver_id, req.body, (driver, error) => {
+  this.updateDriver(req.params.driver_id, req.body, (driver, error) => {
     if (error) {
       res.status(500).send(error);
     } else {
       res.send(driver);
     }
   });
+};
+
+exports.updateDriver = (driver_id, body, callback) => {
+  Driver.findOneAndUpdate({ driver_id }, body)
+    .then(driver => {
+      if (callback) {
+        callback(driver);
+      }
+    })
+    .catch(err => {
+      if (callback) {
+        callback(null, {
+          message: `Some error occurred while updating driver with id ${req.params.delivery_id}. Reason: ${err.message}`
+        });
+      }
+    });
 };
