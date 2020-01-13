@@ -7,15 +7,6 @@ const Delivery = require("../../models/logistics/delivery.model");
 exports.findAll = (req, res) => {
   Driver.find()
     .then(async drivers => {
-      // Add deliveries to driver objects
-      for (let i = 0; i < drivers.length; i++) {
-        const { driver_id } = drivers[i];
-        const resp = await Delivery.find({ driver_id });
-        if (resp) {
-          drivers[i].deliveries = resp;
-        }
-      }
-
       res.send(drivers);
     })
     .catch(err => {
@@ -121,7 +112,8 @@ exports.findOneAndCheckin = (req, res) => {
         }
 
         console.log(resp);
-        // create trip
+        // TODO: create trip
+        const tripBody = {};
       }
 
       // update active_trip and token
