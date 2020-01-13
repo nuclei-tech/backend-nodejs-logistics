@@ -1,5 +1,6 @@
 var NodeGeocoder = require("node-geocoder");
 
+const { createTrip } = require("../../common/trips");
 const Driver = require("../../models/logistics/driver.model");
 const Delivery = require("../../models/logistics/delivery.model");
 
@@ -59,7 +60,7 @@ exports.findOne = (req, res) => {
     });
 };
 
-// TODO: Find a single driver with a driver_id and check in
+// Find a single driver with a driver_id and check in
 exports.findOneAndCheckin = (req, res) => {
   const { body } = req;
   // verify token
@@ -89,6 +90,12 @@ exports.findOneAndCheckin = (req, res) => {
       if (resp) {
         driver.deliveries = resp;
 
+        // create trip
+        const tripBody = {
+          device_id: driver.device_id,
+          geofences: []
+        };
+
         // convert address to lat/lng for each trip
         const geocoder = NodeGeocoder({
           provider: "google",
@@ -96,8 +103,8 @@ exports.findOneAndCheckin = (req, res) => {
           formatter: null
         });
 
-        for (let i = 0; i < resp.length; i++) {
-          const delivery = resp[i];
+        for (let i = 0; i < driver.deliveries.length; i++) {
+          const delivery = driver.deliveries[i];
 
           const geoResp = await geocoder.geocode({
             address: delivery.address.street,
@@ -106,20 +113,37 @@ exports.findOneAndCheckin = (req, res) => {
           });
 
           if (geoResp.length > 0) {
-            delivery.lat = geoResp[0].latitude;
-            delivery.lng = geoResp[0].longitude;
+            tripBody.geofences.push({
+              geometry: {
+                type: "Point",
+                coordinates: [geoResp[0].longitude, geoResp[0].latitude]
+              },
+              metadata: {
+                delivery_id: delivery.delivery_id,
+                label: delivery.label
+              }
+            });
           }
         }
 
-        console.log(resp);
-        // TODO: create trip
-        const tripBody = {};
+        createTrip(tripBody, async newTrip => {
+          console.log(`Trip created. ID: ${newTrip.trip_id}`);
+
+          // update driver with token and active_trip
+          const updatedDriver = await Driver.findOneAndUpdate(
+            { driver_id: driver.driver_id },
+            {
+              token: body.token,
+              active_trip: newTrip.trip_id
+            },
+            {
+              new: true
+            }
+          );
+          updatedDriver.deliveries = driver.deliveries;
+          res.send(updatedDriver);
+        });
       }
-
-      // update active_trip and token
-      driver.token = body.token;
-
-      res.send(driver);
     })
     .catch(err => {
       if (err.kind === "ObjectId") {
@@ -154,7 +178,7 @@ exports.updateDriver = (driver_id, body, callback) => {
     .catch(err => {
       if (callback) {
         callback(null, {
-          message: `Some error occurred while updating driver with id ${req.params.delivery_id}. Reason: ${err.message}`
+          message: `Some error occurred while updating driver with id ${driver_id}. Reason: ${err.message}`
         });
       }
     });
