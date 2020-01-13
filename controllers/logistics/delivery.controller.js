@@ -92,7 +92,7 @@ exports.findOneAndVisit = (req, res) => {
 };
 
 exports.updateDelviery = (delivery_id, body, callback) => {
-  Delivery.findOneAndUpdate({ delivery_id }, body)
+  Delivery.findOneAndUpdate({ delivery_id }, body, { new: true })
     .then(delivery => {
       if (callback) {
         callback(delivery);

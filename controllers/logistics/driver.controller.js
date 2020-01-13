@@ -145,7 +145,7 @@ exports.findOneAndUpdate = (req, res) => {
 };
 
 exports.updateDriver = (driver_id, body, callback) => {
-  Driver.findOneAndUpdate({ driver_id }, body)
+  Driver.findOneAndUpdate({ driver_id }, body, { new: true })
     .then(driver => {
       if (callback) {
         callback(driver);
