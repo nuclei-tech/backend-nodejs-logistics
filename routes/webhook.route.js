@@ -13,7 +13,7 @@ module.exports = app => {
      * You can comment this out after the verification is completed
      * Docs: https://docs.hypertrack.com/#guides-webhooks-setup-one-time-activation
      */
-    console.log(req.body);
+    // console.log(req.body);
     let webhookBody = JSON.parse(req.body);
 
     if (webhookBody) {
@@ -44,37 +44,29 @@ module.exports = app => {
 
               webhook.addTripStatus(data);
 
-              if (_.get(data, "data.value", "") === "destination_arrival") {
-                // complete trip, 2 minutes after arrival
-                setTimeout(() => {
-                  completeTrip(data.data.trip_id);
-                }, 120000);
-
-                // send push notification to device
-                pushNotification.sendNotification(data.device_id, {
-                  placeline: {
-                    status: _.get(data, "data.value", ""),
-                    trip: {
-                      id: _.get(data, "data.trip_id"),
-                      metadata: _.get(data, "data.trip_metadata", {})
-                    }
-                  }
-                });
-              }
-
               if (_.get(data, "data.value", "") === "geofence_enter") {
                 // send push notification to device
                 pushNotification.sendNotification(data.device_id, {
-                  placeline: {
-                    status: _.get(data, "data.value", ""),
-                    trip: {
-                      id: _.get(data, "data.trip_id"),
-                      metadata: _.get(data, "data.trip_metadata", {})
-                    },
-                    geofence: {
-                      metadata: _.get(data, "data.geofence_metadata")
-                    }
-                  }
+                  status: _.get(data, "data.value", ""),
+                  delivery_id: _.get(
+                    data,
+                    "data.geofence_metadata.delivery_id",
+                    ""
+                  ),
+                  label: _.get(data, "data.geofence_metadata.label", "")
+                });
+              }
+
+              if (_.get(data, "data.value", "") === "geofence_exit") {
+                // send push notification to device
+                pushNotification.sendNotification(data.device_id, {
+                  status: _.get(data, "data.value", ""),
+                  delivery_id: _.get(
+                    data,
+                    "data.geofence_metadata.delivery_id",
+                    ""
+                  ),
+                  label: _.get(data, "data.geofence_metadata.label", "")
                 });
               }
 

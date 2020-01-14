@@ -21,6 +21,12 @@ const DriverSchema = new mongoose.Schema(
     token: {
       type: String
     },
+    app_name: {
+      type: String
+    },
+    platform: {
+      type: String
+    },
     deliveries: {
       type: [Object]
     },

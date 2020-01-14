@@ -1,6 +1,9 @@
 var NodeGeocoder = require("node-geocoder");
 
 const { createTrip } = require("../../common/trips");
+const {
+  findOneAndUpdate
+} = require("../../controllers/device-push-info.controller");
 const Driver = require("../../models/logistics/driver.model");
 const Delivery = require("../../models/logistics/delivery.model");
 
@@ -63,9 +66,13 @@ exports.findOne = (req, res) => {
 // Find a single driver with a driver_id and check in
 exports.findOneAndCheckin = (req, res) => {
   const { body } = req;
-  // verify token
-  if (!body.token) {
-    res.status(400).send("Error: A token is required to checkin");
+  // verify push info
+  if (!body.token || !body.app_name || !body.platform) {
+    res
+      .status(400)
+      .send(
+        "Error: Push token, app_name, and platform are required to checkin"
+      );
   }
 
   Driver.findOne({ driver_id: req.params.driver_id })
@@ -129,12 +136,27 @@ exports.findOneAndCheckin = (req, res) => {
         createTrip(tripBody, async newTrip => {
           console.log(`Trip created. ID: ${newTrip.trip_id}`);
 
+          // add/update device push info records
+          findOneAndUpdate(
+            {
+              device_id: driver.device_id,
+              app_name: body.app_name,
+              platform: body.platform,
+              push_token: body.token
+            },
+            updateResult => {
+              console.log(updateResult);
+            }
+          );
+
           // update driver with token and active_trip
           const updatedDriver = await Driver.findOneAndUpdate(
             { driver_id: driver.driver_id },
             {
               token: body.token,
-              active_trip: newTrip.trip_id
+              active_trip: newTrip.trip_id,
+              app_name: body.app_name,
+              platform: body.platform
             },
             {
               new: true

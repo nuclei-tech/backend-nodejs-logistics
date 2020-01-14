@@ -41,22 +41,17 @@ exports.sendNotification = (device_id, payload, res) => {
   pushInfo.findOne({ device_id }).then(pushInfo => {
     if (pushInfo) {
       // set body and title based on status
-      const status = _.get(payload, "placeline.status", "activity");
-      let body = "🔥 A trip activity was recorded";
-      let title = "Trip activity";
+      let body = "";
+      let title = "";
 
-      if (status === "destination_arrival") {
-        body = `🔥 You just entered the trip destination!`;
-        title = "Trip arrival";
+      if (payload.status === "geofence_enter") {
+        body = `You are close to ${payload.label} (#${payload.delivery_id}). Open and edit delivery details now.`;
+        title = "Approaching pending delivery";
       }
 
-      if (status === "geofence_enter") {
-        body = `🔥 You just entered the trip geofence for ${_.get(
-          payload,
-          "placeline.geofence.metadata.label",
-          "a place"
-        )}`;
-        title = "Trip geofence enter";
+      if (payload.status === "geofence_exit") {
+        body = `Delviery ${payload.label} (#${payload.delivery_id}) was marked as visited`;
+        title = "Visited pending delivery";
       }
 
       // store notification record

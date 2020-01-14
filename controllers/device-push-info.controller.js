@@ -1,5 +1,30 @@
 const DevicePushInfo = require("../models/device-push-info.model");
 
+// Add/Update device push info with device_id
+exports.findOneAndUpdate = (info, callback) => {
+  DevicePushInfo.findOneAndUpdate(
+    { device_id: info.device_id },
+    {
+      $set: {
+        app_name: info.app_name,
+        platform: info.platform,
+        push_token: info.push_token
+      }
+    },
+    { upsert: true, new: true }
+  )
+    .then(pushInfo => {
+      if (callback) {
+        callback(pushInfo);
+      }
+    })
+    .catch(err => {
+      if (callback) {
+        callback(err);
+      }
+    });
+};
+
 // Retrieve and return all device push info from the database
 exports.findAll = (req, res) => {
   DevicePushInfo.find()
@@ -47,9 +72,7 @@ exports.deleteOne = (req, res) => {
     })
     .catch(err => {
       res.status(500).send({
-        message: `Device push info with id ${
-          req.params.device_id
-        } could not be removed. Reason: ${err.message}`
+        message: `Device push info with id ${req.params.device_id} could not be removed. Reason: ${err.message}`
       });
     });
 };
