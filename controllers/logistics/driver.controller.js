@@ -68,7 +68,7 @@ exports.findOneAndCheckin = (req, res) => {
   const { body } = req;
   // verify push info
   if (!body.token || !body.app_name || !body.platform) {
-    res
+    return res
       .status(400)
       .send(
         "Error: Push token, app_name, and platform are required to checkin"

@@ -15,7 +15,7 @@ const push = new PushService({
       keyId: process.env.APN_KEY_ID,
       teamId: process.env.APN_TEAM_ID
     },
-    production: true,
+    production: false,
     isAlwaysUseFCM: true
   }
 });
@@ -23,10 +23,10 @@ const push = new PushService({
 exports.sendNotification = (device_id, payload, res) => {
   // continue only if all keys are set
   if (
-    process.env.FCM_KEY !== "" &&
-    process.env.APN_CERT !== "" &&
-    process.env.APN_KEY_ID !== "" &&
-    process.env.APN_TEAM_ID !== ""
+    !process.env.FCM_KEY ||
+    !process.env.APN_CERT ||
+    !process.env.APN_KEY_ID ||
+    !process.env.APN_TEAM_ID
   ) {
     if (res) {
       res.status(500).send({
@@ -90,6 +90,10 @@ exports.sendNotification = (device_id, payload, res) => {
           }
           console.log(`Error creating push notification: ${err}`);
         });
+    } else {
+      return res.status(500).send({
+        message: `Error: Couldn't find push information for device id`
+      });
     }
   });
 };
