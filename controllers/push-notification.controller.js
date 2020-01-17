@@ -58,13 +58,20 @@ exports.sendNotification = (device_id, payload, res) => {
       PushNotification.create({ ids: device_id, payload })
         .then(() => {
           // send push notification
+          // silent: with 'normal' priority and no sound, badge or alert
           push
             .send([pushInfo.push_token], {
               title, // REQUIRED for Android
               topic: pushInfo.app_name, // REQUIRED for iOS
               body,
               contentAvailable: true,
-              custom: payload
+              custom: payload,
+              category: payload.status,
+              alert: {
+                title,
+                body
+              },
+              sound: "default"
             })
             .then(results => {
               if (results) {
