@@ -8,6 +8,14 @@
     "platform": ""
   },
   {
+    "driver_id": "Amanpreet",
+    "name": "Amanpreet's Phone",
+    "device_id": "ABC-123",
+    "token": "",
+    "app_name": "",
+    "platform": ""
+  },
+  {
     "driver_id": "SP",
     "name": "SP's Phone",
     "device_id": "F6DDA132A-519C-49C4-B4DD-A16CA752428F",
