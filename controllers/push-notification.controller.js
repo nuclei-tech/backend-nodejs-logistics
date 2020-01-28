@@ -74,6 +74,7 @@ exports.sendNotification = (device_id, payload, res) => {
               sound: "default"
             })
             .then(results => {
+              console.log(results);
               if (results) {
                 const responseText = `Push notification for id '${
                   pushInfo.push_token
