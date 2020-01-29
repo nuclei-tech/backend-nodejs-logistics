@@ -1,4 +1,5 @@
 const PushService = require("node-pushnotifications");
+const gcm = require("node-gcm");
 const _ = require("lodash");
 
 const PushNotification = require("../models/push-notification.model");
@@ -19,6 +20,8 @@ const push = new PushService({
     isAlwaysUseFCM: true
   }
 });
+
+const pushFCM = new gcm.Sender(process.env.FCM_KEY);
 
 exports.sendNotification = (device_id, payload, res) => {
   // continue only if all keys are set
@@ -59,36 +62,45 @@ exports.sendNotification = (device_id, payload, res) => {
         .then(() => {
           // send push notification
           // silent: with 'normal' priority and no sound, badge or alert
-          push
-            .send([pushInfo.push_token], {
-              title, // REQUIRED for Android
-              topic: pushInfo.app_name, // REQUIRED for iOS
-              body,
-              contentAvailable: true,
-              custom: payload,
-              category: payload.status,
-              alert: {
+          if (pushInfo.platform === "android") {
+            // Android cannot have notification and data at the same time, using GCM to overcome
+            // more details: https://wajahatkarim.com/2018/05/firebase-notifications-in-background--foreground-in-android/
+            const message = new gcm.Message({
+              data: {
+                priority: "high",
+                contentAvailable: true,
                 title,
-                body
-              },
-              sound: "default"
-            })
-            .then(results => {
-              console.log(results, results[0].message[0]);
-              if (results) {
-                const responseText = `Push notification for id '${
-                  pushInfo.push_token
-                }' and app '${pushInfo.app_name}' stored. Notification push ${
-                  _.get(results, "[0].success", 0) === 1 ? "succeded" : "failed"
-                }`;
-
-                if (res) {
-                  res.status(201).send({ message: responseText });
-                }
-
-                console.log(responseText);
+                message: body
               }
             });
+            pushFCM.send(
+              message,
+              {
+                registrationTokens: [pushInfo.push_token]
+              },
+              function(err, response) {
+                res.status(201).send({ err, response });
+              }
+            );
+          } else {
+            push
+              .send([pushInfo.push_token], {
+                title, // REQUIRED for Android
+                topic: pushInfo.app_name, // REQUIRED for iOS
+                body,
+                contentAvailable: true,
+                custom: payload,
+                category: payload.status,
+                alert: {
+                  title,
+                  body
+                },
+                sound: "default"
+              })
+              .then(results => {
+                res.status(201).send(results);
+              });
+          }
         })
         .catch(err => {
           if (res) {

@@ -1395,7 +1395,7 @@ node-forge@^0.7.1:
   resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-0.7.6.tgz#fdf3b418aee1f94f0ef642cd63486c77ca9724ac"
   integrity sha512-sol30LUpz1jQFBjOKwbjxijiE3b6pjd74YwfD0fJOKPjF+fONKb2Yg8rYgS6+bK6VDl+/wfr4IYpC7jDzLUIfw==
 
-node-gcm@1.0.2:
+node-gcm@1.0.2, node-gcm@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/node-gcm/-/node-gcm-1.0.2.tgz#4e5828b9c92a7635302e0a5ff0952146299f9771"
   integrity sha512-NEVb5jB06I/e9ZfJGWhHsRhJQLk1zO5iZjbQJ7su8j9vhHrpxc7KJHyBxWbv28+4uWFZ0AfTVHoMIyRpEVISUQ==
