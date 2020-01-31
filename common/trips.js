@@ -44,6 +44,8 @@ function createTrip(tripBody, callback) {
   request(options, (error, response, body) => {
     if (!error && response.statusCode == 201) {
       callback(body);
+    } else {
+      callback(error, body);
     }
   });
 }

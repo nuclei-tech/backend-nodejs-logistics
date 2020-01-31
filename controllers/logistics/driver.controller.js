@@ -133,7 +133,14 @@ exports.findOneAndCheckin = (req, res) => {
           }
         }
 
-        createTrip(tripBody, async newTrip => {
+        createTrip(tripBody, async (newTrip, error) => {
+          if (error) {
+            console.log(
+              `Error: Couldn't create a new trip during checkin: ${error}`
+            );
+            res.status(500).send(error);
+          }
+
           console.log(`Trip created. ID: ${newTrip.trip_id}`);
 
           // add/update device push info records
