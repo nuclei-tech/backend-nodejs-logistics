@@ -70,7 +70,8 @@ exports.sendNotification = (device_id, payload, res) => {
                 priority: "high",
                 contentAvailable: true,
                 title,
-                message: body
+                message: body,
+                ...payload
               }
             });
             pushFCM.send(
