@@ -13,12 +13,17 @@ var { initLogisticsSamples } = require("./common/logistics/logistics");
 
 // setup express
 app.use(function(req, res, next) {
-  req.pipe(
-    concat(function(data) {
-      req.body = data;
-      next();
-    })
-  );
+  // bugfix: only images should be piped
+  if (req.headers["content-type"].includes("image")) {
+    req.pipe(
+      concat(function(data) {
+        req.body = data;
+        next();
+      })
+    );
+  } else {
+    next();
+  }
 });
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
