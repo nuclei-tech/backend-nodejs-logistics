@@ -5,15 +5,25 @@ var io = require("socket.io")(http);
 var bodyParser = require("body-parser");
 var cors = require("cors");
 var mongoose = require("mongoose");
+var concat = require("concat-stream");
 
 var { updateAllDevices } = require("./common/devices");
 var { updateAllTrips } = require("./common/trips");
 var { initLogisticsSamples } = require("./common/logistics/logistics");
 
 // setup express
+app.use(function(req, res, next) {
+  req.pipe(
+    concat(function(data) {
+      req.body = data;
+      next();
+    })
+  );
+});
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(bodyParser.text({ type: "text/plain" }));
+app.use(bodyParser.text({ limit: "50mb", type: "text/plain" }));
+app.use(bodyParser.raw({ limit: "50mb", type: "application/binary" }));
 app.use(cors());
 
 // setup socket.io

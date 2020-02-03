@@ -1,3 +1,6 @@
+const aws = require("aws-sdk");
+const uuidv4 = require("uuid/v4");
+var mime = require("mime-types");
 const Delivery = require("../../models/logistics/delivery.model");
 
 // Retrieve and return all deliveries from the database.
@@ -59,6 +62,43 @@ exports.findOneAndUpdate = (req, res) => {
       res.send(delivery);
     }
   });
+};
+
+exports.findOneAndUploadImage = (req, res) => {
+  // upload to s3
+  const s3 = new aws.S3({
+    accessKeyId: process.env.BUCKETEER_AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.BUCKETEER_AWS_SECRET_ACCESS_KEY,
+    region: process.env.BUCKETEER_AWS_REGION
+  });
+
+  const s3Params = {
+    Bucket: process.env.BUCKETEER_BUCKET_NAME,
+    ContentType: req.headers["content-type"],
+    ACL: "public-read",
+    Body: req.body,
+    Key: `${uuidv4()}.${mime.extension(req.headers["content-type"])}`
+  };
+
+  s3.upload(s3Params, function(s3Err, data) {
+    if (s3Err) {
+      console.log(`File uploaded failed: ${s3Err}`);
+
+      res.status(500).send({
+        status: "failed",
+        reason: s3Err
+      });
+    } else {
+      console.log(`File uploaded successfully at ${data.Location}`);
+
+      res.status(201).send({
+        status: "success",
+        url: data.Location
+      });
+    }
+  });
+
+  // update delivery
 };
 
 // Mark a delivery as completed using delivery_id
