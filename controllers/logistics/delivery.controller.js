@@ -80,7 +80,7 @@ exports.findOneAndUploadImage = (req, res) => {
     Key: `${uuidv4()}.${mime.extension(req.headers["content-type"])}`
   };
 
-  s3.upload(s3Params, function(s3Err, data) {
+  s3.upload(s3Params, (s3Err, data) => {
     if (s3Err) {
       console.log(`File uploaded failed: ${s3Err}`);
 
@@ -91,14 +91,20 @@ exports.findOneAndUploadImage = (req, res) => {
     } else {
       console.log(`File uploaded successfully at ${data.Location}`);
 
-      res.status(201).send({
-        status: "success",
-        url: data.Location
-      });
+      // update delivery
+      this.updateDelviery(
+        req.params.delivery_id,
+        { deliveryPicture: data.Location },
+        (delivery, error) => {
+          if (error) {
+            res.status(500).send(error);
+          } else {
+            res.send(delivery);
+          }
+        }
+      );
     }
   });
-
-  // update delivery
 };
 
 // Mark a delivery as completed using delivery_id
