@@ -14,7 +14,10 @@ var { initLogisticsSamples } = require("./common/logistics/logistics");
 // setup express
 app.use(function(req, res, next) {
   // bugfix: only images should be piped
-  if (req.headers["content-type"].includes("image")) {
+  if (
+    req.headers["content-type"] &&
+    req.headers["content-type"].includes("image")
+  ) {
     req.pipe(
       concat(function(data) {
         req.body = data;
