@@ -183,6 +183,7 @@ exports.findOneAndCheckin = (req, res) => {
                   type: "Point",
                   coordinates: [geoResp[0].longitude, geoResp[0].latitude]
                 },
+                radius: 100,
                 metadata: {
                   delivery_id: delivery.delivery_id,
                   label: delivery.label,

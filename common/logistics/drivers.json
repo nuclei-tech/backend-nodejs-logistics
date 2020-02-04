@@ -4,23 +4,23 @@
     "name": "Alex's Phone",
     "device_id": "1ECF879B-FEB7-4820-9C29-DD9DD57EB4FF",
     "token": "",
-    "app_name": "",
-    "platform": ""
+    "app_name": "com.hypertrack.logistics.ios.github",
+    "platform": "ios"
   },
   {
     "driver_id": "Amanpreet",
     "name": "Amanpreet's Phone",
-    "device_id": "ABC-123",
+    "device_id": "E5697287-E7D0-3BE2-8D93-B2CD9ED0826C",
     "token": "",
-    "app_name": "",
-    "platform": ""
+    "app_name": "com.hypertrack.logistics.android.github",
+    "platform": "android"
   },
   {
-    "driver_id": "SP",
-    "name": "SP's Phone",
-    "device_id": "F6DDA132A-519C-49C4-B4DD-A16CA752428F",
+    "driver_id": "Richard",
+    "name": "Richard's Phone",
+    "device_id": "B9677CC0-6005-4E89-AC54-9CA9CCD97032",
     "token": "",
-    "app_name": "",
-    "platform": ""
+    "app_name": "com.hypertrack.logistics.ios.github",
+    "platform": "ios"
   }
 ]
