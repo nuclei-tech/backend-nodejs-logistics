@@ -75,6 +75,9 @@ const DeliverySchema = new mongoose.Schema(
     },
     exitedAt: {
       type: Date
+    },
+    completedAt: {
+      type: Date
     }
   },
   {

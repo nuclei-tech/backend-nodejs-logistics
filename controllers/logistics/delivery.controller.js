@@ -1,6 +1,8 @@
 const aws = require("aws-sdk");
 const uuidv4 = require("uuid/v4");
 var mime = require("mime-types");
+const { completeTrip } = require("../../common/trips");
+const Driver = require("../../models/logistics/driver.model");
 const Delivery = require("../../models/logistics/delivery.model");
 
 // Retrieve and return all deliveries from the database.
@@ -109,17 +111,68 @@ exports.findOneAndUploadImage = (req, res) => {
 
 // Mark a delivery as completed using delivery_id
 exports.findOneAndComplete = (req, res) => {
-  this.updateDelivery(
-    req.params.delivery_id,
-    { status: "completed" },
-    (delivery, error) => {
-      if (error) {
-        res.status(500).send(error);
-      } else {
-        res.send(delivery);
+  Delivery.findOneAndUpdate(
+    { delivery_id: req.params.delivery_id },
+    { status: "completed", completedAt: new Date() },
+    { new: true }
+  )
+    .then(delivery => {
+      this.checkTripCompletion(delivery.driver_id);
+      res.send(delivery);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    });
+};
+
+exports.checkTripCompletion = driver_id => {
+  // find all deliveries for driver
+  Delivery.find({ driver_id })
+    .then(async deliveries => {
+      // check for incomplete delivery
+      for (let i = 0; i < deliveries.length; i++) {
+        const delivery = deliveries[i];
+        if (delivery.status !== "completed") {
+          // finish check, not all deliveries are completed
+          return;
+        }
       }
-    }
-  );
+
+      // finished without exit, all trips are completed
+      // lookup driver to find trip_id
+      Driver.findOne({ driver_id })
+        .then(async driver => {
+          // complete trip
+          await completeTrip(driver.active_trip);
+
+          // update driver object, remove active trip
+          await Driver.findOneAndUpdate(
+            { driver_id },
+            {
+              active_trip: ""
+            },
+            {
+              new: true
+            }
+          );
+        })
+        .catch(err => {
+          if (err.kind === "ObjectId") {
+            return res.status(404).send({
+              message: "Driver not found with id " + req.params.driver_id
+            });
+          }
+          return res.status(500).send({
+            message: "Error retrieving driver with id " + req.params.driver_id
+          });
+        });
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving deliveries."
+      });
+    });
 };
 
 exports.updateDelivery = (delivery_id, body, callback) => {
@@ -132,7 +185,7 @@ exports.updateDelivery = (delivery_id, body, callback) => {
     .catch(err => {
       if (callback) {
         callback(null, {
-          message: `Some error occurred while updating delivery with id ${req.params.delivery_id}. Reason: ${err.message}`
+          message: `Some error occurred while updating delivery with id ${delivery_id}. Reason: ${err.message}`
         });
       }
     });
