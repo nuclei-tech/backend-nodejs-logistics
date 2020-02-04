@@ -55,7 +55,7 @@ exports.findOne = (req, res) => {
 
 // Update a delivery using delivery_id
 exports.findOneAndUpdate = (req, res) => {
-  this.updateDelviery(req.params.delivery_id, req.body, (delivery, error) => {
+  this.updateDelivery(req.params.delivery_id, req.body, (delivery, error) => {
     if (error) {
       res.status(500).send(error);
     } else {
@@ -92,7 +92,7 @@ exports.findOneAndUploadImage = (req, res) => {
       console.log(`File uploaded successfully at ${data.Location}`);
 
       // update delivery
-      this.updateDelviery(
+      this.updateDelivery(
         req.params.delivery_id,
         { deliveryPicture: data.Location },
         (delivery, error) => {
@@ -109,7 +109,7 @@ exports.findOneAndUploadImage = (req, res) => {
 
 // Mark a delivery as completed using delivery_id
 exports.findOneAndComplete = (req, res) => {
-  this.updateDelviery(
+  this.updateDelivery(
     req.params.delivery_id,
     { status: "completed" },
     (delivery, error) => {
@@ -122,7 +122,7 @@ exports.findOneAndComplete = (req, res) => {
   );
 };
 
-exports.updateDelviery = (delivery_id, body, callback) => {
+exports.updateDelivery = (delivery_id, body, callback) => {
   Delivery.findOneAndUpdate({ delivery_id }, body, { new: true })
     .then(delivery => {
       if (callback) {

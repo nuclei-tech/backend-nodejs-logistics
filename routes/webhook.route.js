@@ -2,7 +2,9 @@ module.exports = app => {
   const webhook = require("../controllers/webhook.controller");
   const trip = require("../controllers/trip.controller");
   const pushNotification = require("../controllers/push-notification.controller");
-  const { completeTrip } = require("../common/trips");
+  const {
+    updateDelivery
+  } = require("../controllers/logistics/delivery.controller");
   const _ = require("lodash");
 
   // Receive HyperTrack webhooks
@@ -45,29 +47,49 @@ module.exports = app => {
               webhook.addTripStatus(data);
 
               if (_.get(data, "data.value", "") === "geofence_enter") {
-                // send push notification to device
-                pushNotification.sendNotification(data.device_id, {
-                  status: _.get(data, "data.value", ""),
-                  delivery_id: _.get(
-                    data,
-                    "data.geofence_metadata.delivery_id",
-                    ""
-                  ),
-                  label: _.get(data, "data.geofence_metadata.label", "")
-                });
+                const delivery_id = _.get(
+                  data,
+                  "data.geofence_metadata.delivery_id",
+                  ""
+                );
+
+                if (delivery_id) {
+                  // add enteredAt timestamp to delivery
+                  updateDelivery(delivery_id, {
+                    enteredAt: _.get(data, "data.recorded_at", "")
+                  });
+
+                  // send delivery push notification to device
+                  pushNotification.sendNotification(data.device_id, {
+                    status: _.get(data, "data.value", ""),
+                    enteredAt: _.get(data, "data.recorded_at", ""),
+                    delivery_id,
+                    label: _.get(data, "data.geofence_metadata.label", "")
+                  });
+                }
               }
 
               if (_.get(data, "data.value", "") === "geofence_exit") {
-                // send push notification to device
-                pushNotification.sendNotification(data.device_id, {
-                  status: _.get(data, "data.value", ""),
-                  delivery_id: _.get(
-                    data,
-                    "data.geofence_metadata.delivery_id",
-                    ""
-                  ),
-                  label: _.get(data, "data.geofence_metadata.label", "")
-                });
+                const delivery_id = _.get(
+                  data,
+                  "data.geofence_metadata.delivery_id",
+                  ""
+                );
+
+                if (delivery_id) {
+                  // add exitedAt timestamp to delivery
+                  updateDelivery(delivery_id, {
+                    exitedAt: _.get(data, "data.recorded_at", "")
+                  });
+
+                  // send push notification to device
+                  pushNotification.sendNotification(data.device_id, {
+                    status: _.get(data, "data.value", ""),
+                    exitedAt: _.get(data, "data.recorded_at", ""),
+                    delivery_id,
+                    label: _.get(data, "data.geofence_metadata.label", "")
+                  });
+                }
               }
 
               if (_.get(data, "data.value", "") === "created") {
