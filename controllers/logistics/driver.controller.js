@@ -140,73 +140,90 @@ exports.findOneAndCheckin = (req, res) => {
       if (resp) {
         driver.deliveries = resp;
 
-        // create trip
-        const tripBody = {
-          device_id: driver.device_id,
-          geofences: []
-        };
+        // add/update device push info records
+        findOneAndUpdate(
+          {
+            device_id: driver.device_id,
+            app_name: body.app_name,
+            platform: body.platform,
+            push_token: body.token
+          },
+          updateResult => {
+            console.log(updateResult);
+          }
+        );
 
-        // convert address to lat/lng for each trip
-        const geocoder = NodeGeocoder({
-          provider: "google",
-          apiKey: process.env.GMAPS_KEY,
-          formatter: null
-        });
+        // verify if there's an active trip
+        if (!driver.active_trip || driver.active_trip === "") {
+          // create trip
+          const tripBody = {
+            device_id: driver.device_id,
+            geofences: []
+          };
 
-        for (let i = 0; i < driver.deliveries.length; i++) {
-          const delivery = driver.deliveries[i];
-
-          const geoResp = await geocoder.geocode({
-            address: delivery.address.street,
-            country: delivery.address.country,
-            zipcode: delivery.address.postalCode
+          // convert address to lat/lng for each trip
+          const geocoder = NodeGeocoder({
+            provider: "google",
+            apiKey: process.env.GMAPS_KEY,
+            formatter: null
           });
 
-          if (geoResp.length > 0) {
-            tripBody.geofences.push({
-              geometry: {
-                type: "Point",
-                coordinates: [geoResp[0].longitude, geoResp[0].latitude]
-              },
-              metadata: {
-                delivery_id: delivery.delivery_id,
-                label: delivery.label,
-                customerNote: delivery.customerNote,
-                items: delivery.items
-              }
+          for (let i = 0; i < driver.deliveries.length; i++) {
+            const delivery = driver.deliveries[i];
+
+            const geoResp = await geocoder.geocode({
+              address: delivery.address.street,
+              country: delivery.address.country,
+              zipcode: delivery.address.postalCode
             });
-          }
-        }
 
-        createTrip(tripBody, async (newTrip, error) => {
-          if (error) {
-            console.log(
-              `Error: Couldn't create a new trip during checkin: ${error}`
-            );
-            res.status(500).send(error);
-          }
-
-          console.log(`Trip created. ID: ${newTrip.trip_id}`);
-
-          // add/update device push info records
-          findOneAndUpdate(
-            {
-              device_id: driver.device_id,
-              app_name: body.app_name,
-              platform: body.platform,
-              push_token: body.token
-            },
-            updateResult => {
-              console.log(updateResult);
+            if (geoResp.length > 0) {
+              tripBody.geofences.push({
+                geometry: {
+                  type: "Point",
+                  coordinates: [geoResp[0].longitude, geoResp[0].latitude]
+                },
+                metadata: {
+                  delivery_id: delivery.delivery_id,
+                  label: delivery.label,
+                  customerNote: delivery.customerNote
+                }
+              });
             }
-          );
+          }
 
-          // update driver with token and active_trip
+          createTrip(tripBody, async (newTrip, error) => {
+            if (error) {
+              console.log(
+                `Error: Couldn't create a new trip during checkin: ${error}`
+              );
+              res.status(500).send(error);
+            }
+
+            console.log(`Trip created. ID: ${newTrip.trip_id}`);
+
+            // update driver with token and active_trip
+            const updatedDriver = await Driver.findOneAndUpdate(
+              { driver_id: driver.driver_id },
+              {
+                token: body.token,
+                active_trip: newTrip.trip_id,
+                app_name: body.app_name,
+                platform: body.platform
+              },
+              {
+                new: true
+              }
+            );
+            updatedDriver.deliveries = driver.deliveries;
+            res.send(updatedDriver);
+          });
+        } else {
+          // update driver with token
           const updatedDriver = await Driver.findOneAndUpdate(
             { driver_id: driver.driver_id },
             {
               token: body.token,
-              active_trip: newTrip.trip_id,
               app_name: body.app_name,
               platform: body.platform
             },
@@ -216,7 +233,7 @@ exports.findOneAndCheckin = (req, res) => {
           );
           updatedDriver.deliveries = driver.deliveries;
           res.send(updatedDriver);
-        });
+        }
       }
     })
     .catch(err => {
