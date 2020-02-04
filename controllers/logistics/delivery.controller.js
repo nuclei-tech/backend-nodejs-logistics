@@ -122,21 +122,6 @@ exports.findOneAndComplete = (req, res) => {
   );
 };
 
-// Mark a delivery as visited using delivery_id
-exports.findOneAndVisit = (req, res) => {
-  this.updateDelviery(
-    req.params.delivery_id,
-    { status: "visited" },
-    (delivery, error) => {
-      if (error) {
-        res.status(500).send(error);
-      } else {
-        res.send(delivery);
-      }
-    }
-  );
-};
-
 exports.updateDelviery = (delivery_id, body, callback) => {
   Delivery.findOneAndUpdate({ delivery_id }, body, { new: true })
     .then(delivery => {

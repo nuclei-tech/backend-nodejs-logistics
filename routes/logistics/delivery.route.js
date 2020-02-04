@@ -24,10 +24,4 @@ module.exports = app => {
     "/logistics/deliveries/:delivery_id/complete",
     deliveries.findOneAndComplete
   );
-
-  // Mark a single delivery as visited with delivery_id
-  app.get(
-    "/logistics/deliveries/:delivery_id/visit",
-    deliveries.findOneAndVisit
-  );
 };
