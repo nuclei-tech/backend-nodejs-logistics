@@ -170,7 +170,9 @@ exports.findOneAndCheckin = (req, res) => {
               },
               metadata: {
                 delivery_id: delivery.delivery_id,
-                label: delivery.label
+                label: delivery.label,
+                customerNote: delivery.customerNote,
+                items: delivery.items
               }
             });
           }
