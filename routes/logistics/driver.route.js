@@ -15,4 +15,10 @@ module.exports = app => {
 
   // Check in a single driver using driver_id
   app.post("/logistics/drivers/:driver_id/checkin", drivers.findOneAndCheckin);
+
+  // Check out a single driver using driver_id
+  app.post(
+    "/logistics/drivers/:driver_id/checkout",
+    drivers.findOneAndCheckout
+  );
 };

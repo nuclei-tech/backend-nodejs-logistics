@@ -1,6 +1,6 @@
 var NodeGeocoder = require("node-geocoder");
 
-const { createTrip } = require("../../common/trips");
+const { createTrip, completeTrip } = require("../../common/trips");
 const {
   findOneAndUpdate
 } = require("../../controllers/device-push-info.controller");
@@ -50,6 +50,49 @@ exports.findOne = (req, res) => {
       }
 
       res.send(driver);
+    })
+    .catch(err => {
+      if (err.kind === "ObjectId") {
+        return res.status(404).send({
+          message: "Driver not found with id " + req.params.driver_id
+        });
+      }
+      return res.status(500).send({
+        message: "Error retrieving driver with id " + req.params.driver_id
+      });
+    });
+};
+
+// Find a single driver with a driver_id and check out
+exports.findOneAndCheckout = (req, res) => {
+  Driver.findOne({ driver_id: req.params.driver_id })
+    .then(async driver => {
+      if (!driver) {
+        return res.status(404).send({
+          message: "Driver not found with id " + req.params.driver_id
+        });
+      }
+
+      if (!driver.active_trip) {
+        return res.status(500).send({
+          message: `Driver with id ${req.params.driver_id} has no active trip`
+        });
+      }
+
+      // complete trip
+      await completeTrip(driver.active_trip);
+
+      // update driver object, remove active trip
+      const updatedDriver = await Driver.findOneAndUpdate(
+        { driver_id: driver.driver_id },
+        {
+          active_trip: ""
+        },
+        {
+          new: true
+        }
+      );
+      res.send(updatedDriver);
     })
     .catch(err => {
       if (err.kind === "ObjectId") {
