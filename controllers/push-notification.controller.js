@@ -99,7 +99,11 @@ exports.sendNotification = (device_id, payload, res) => {
                 sound: "default"
               })
               .then(results => {
-                res.status(201).send(results);
+                if (res) {
+                  res.status(201).send(results);
+                }
+
+                console.log(results);
               });
           }
         })
