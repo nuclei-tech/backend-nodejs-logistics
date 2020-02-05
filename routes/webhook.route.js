@@ -15,7 +15,7 @@ module.exports = app => {
      * You can comment this out after the verification is completed
      * Docs: https://docs.hypertrack.com/#guides-webhooks-setup-one-time-activation
      */
-    // console.log(req.body);
+    console.log(req.body);
     let webhookBody = JSON.parse(req.body);
 
     if (webhookBody) {
@@ -56,13 +56,14 @@ module.exports = app => {
                 if (delivery_id) {
                   // add enteredAt timestamp to delivery
                   updateDelivery(delivery_id, {
-                    enteredAt: _.get(data, "data.recorded_at", "")
+                    status: "visited",
+                    enteredAt: data.created_at
                   });
 
                   // send delivery push notification to device
                   pushNotification.sendNotification(data.device_id, {
                     status: _.get(data, "data.value", ""),
-                    enteredAt: _.get(data, "data.recorded_at", ""),
+                    enteredAt: data.created_at,
                     delivery_id,
                     label: _.get(data, "data.geofence_metadata.label", "")
                   });
@@ -79,13 +80,14 @@ module.exports = app => {
                 if (delivery_id) {
                   // add exitedAt timestamp to delivery
                   updateDelivery(delivery_id, {
-                    exitedAt: _.get(data, "data.recorded_at", "")
+                    status: "visited",
+                    exitedAt: data.created_at
                   });
 
                   // send push notification to device
                   pushNotification.sendNotification(data.device_id, {
                     status: _.get(data, "data.value", ""),
-                    exitedAt: _.get(data, "data.recorded_at", ""),
+                    exitedAt: data.created_at,
                     delivery_id,
                     label: _.get(data, "data.geofence_metadata.label", "")
                   });
