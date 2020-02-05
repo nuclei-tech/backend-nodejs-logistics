@@ -15,7 +15,7 @@ module.exports = app => {
      * You can comment this out after the verification is completed
      * Docs: https://docs.hypertrack.com/#guides-webhooks-setup-one-time-activation
      */
-    // console.log(req.body);
+    console.log(req.body);
     let webhookBody = JSON.parse(req.body);
 
     if (webhookBody) {
