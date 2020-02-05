@@ -110,11 +110,11 @@ exports.findOneAndCheckout = (req, res) => {
 exports.findOneAndCheckin = (req, res) => {
   const { body } = req;
   // verify push info
-  if (!body.token || !body.app_name || !body.platform) {
+  if (!body.device_id || !body.token || !body.app_name || !body.platform) {
     return res
       .status(400)
       .send(
-        "Error: Push token, app_name, and platform are required to checkin"
+        "Error: Device ID, push token, app name, and platform are required to checkin"
       );
   }
 
@@ -124,13 +124,6 @@ exports.findOneAndCheckin = (req, res) => {
         return res.status(404).send({
           message: "Driver not found with id " + req.params.driver_id
         });
-      }
-
-      // verify device_id
-      if (!driver.device_id) {
-        res
-          .status(400)
-          .send("Error: A driver device_id is required to checkin");
       }
 
       // Add deliveries to driver
@@ -143,7 +136,7 @@ exports.findOneAndCheckin = (req, res) => {
         // add/update device push info records
         findOneAndUpdate(
           {
-            device_id: driver.device_id,
+            device_id: body.device_id,
             app_name: body.app_name,
             platform: body.platform,
             push_token: body.token
@@ -157,7 +150,7 @@ exports.findOneAndCheckin = (req, res) => {
         if (!driver.active_trip || driver.active_trip === "") {
           // create trip
           const tripBody = {
-            device_id: driver.device_id,
+            device_id: body.device_id,
             geofences: []
           };
 
@@ -186,8 +179,9 @@ exports.findOneAndCheckin = (req, res) => {
                 radius: 100,
                 metadata: {
                   delivery_id: delivery.delivery_id,
-                  label: delivery.label,
-                  customerNote: delivery.customerNote
+                  label: delivery.label
+                  // note could be too long for metadata
+                  // customerNote: delivery.customerNote
                 }
               });
             }
@@ -207,6 +201,7 @@ exports.findOneAndCheckin = (req, res) => {
             const updatedDriver = await Driver.findOneAndUpdate(
               { driver_id: driver.driver_id },
               {
+                device_id: body.device_id,
                 token: body.token,
                 active_trip: newTrip.trip_id,
                 app_name: body.app_name,
@@ -224,6 +219,7 @@ exports.findOneAndCheckin = (req, res) => {
           const updatedDriver = await Driver.findOneAndUpdate(
             { driver_id: driver.driver_id },
             {
+              device_id: body.device_id,
               token: body.token,
               app_name: body.app_name,
               platform: body.platform
