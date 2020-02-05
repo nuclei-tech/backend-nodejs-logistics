@@ -22,7 +22,7 @@ const TripStatusSchema = new mongoose.Schema(
       type: Object
     },
     geofence_metadata: {
-      type: String
+      type: Object
     },
     summary: {
       type: Object
