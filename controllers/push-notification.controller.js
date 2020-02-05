@@ -103,7 +103,10 @@ exports.sendNotification = (device_id, payload, res) => {
                   res.status(201).send(results);
                 }
 
-                console.log(results);
+                const util = require("util");
+                console.log(
+                  util.inspect(results, false, null, true /* enable colors */)
+                );
               });
           }
         })
