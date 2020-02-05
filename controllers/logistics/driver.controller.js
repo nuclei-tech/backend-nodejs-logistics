@@ -151,6 +151,10 @@ exports.findOneAndCheckin = (req, res) => {
           // create trip
           const tripBody = {
             device_id: body.device_id,
+            metadata: {
+              driver_id: driver.driver_id,
+              name: driver.name
+            },
             geofences: []
           };
 
