@@ -278,7 +278,7 @@
     "status": "completed",
     "enteredAt": "2020-02-04T22:54:37.506Z",
     "exitedAt": "2020-02-04T23:54:37.506Z",
-    "completedAt": "2020-02-04T37:54:37.506Z",
+    "completedAt": "2020-02-04T23:56:37.506Z",
     "label": "Richard's Package #3",
     "address": {
       "street": "1 Market Str",
@@ -341,7 +341,7 @@
     "status": "completed",
     "enteredAt": "2020-02-04T22:54:37.506Z",
     "exitedAt": "2020-02-04T23:54:37.506Z",
-    "completedAt": "2020-02-04T37:54:37.506Z",
+    "completedAt": "2020-02-04T23:56:37.506Z",
     "label": "AG's Package #3",
     "address": {
       "street": "1 Market Str",
@@ -361,7 +361,7 @@
     "delivery_id": "16",
     "driver_id": "Amanpreet",
     "status": "visited",
-    "enteredAt": "2020-02-04T23:54:37.506Z",
+    "enteredAt": "2020-02-04T21:54:37.506Z",
     "label": "Amanpreet's Package",
     "address": {
       "street": "1 Market Str",
@@ -404,7 +404,7 @@
     "status": "completed",
     "enteredAt": "2020-02-04T22:54:37.506Z",
     "exitedAt": "2020-02-04T23:54:37.506Z",
-    "completedAt": "2020-02-04T37:54:37.506Z",
+    "completedAt": "2020-02-04T23:56:37.506Z",
     "label": "Amanpreet's Package #3",
     "address": {
       "street": "1 Market Str",
