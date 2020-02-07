@@ -89,8 +89,6 @@ exports.sendNotification = (device_id, payload, res) => {
                   teamId: process.env.APN_TEAM_ID
                 },
                 production: payload.production
-                  ? payload.production
-                  : process.env.NODE_ENV === "production"
               }
             });
 
