@@ -16,7 +16,7 @@ const push = new PushService({
       keyId: process.env.APN_KEY_ID,
       teamId: process.env.APN_TEAM_ID
     },
-    production: false,
+    production: process.env.NODE_ENV === production,
     isAlwaysUseFCM: true
   }
 });
