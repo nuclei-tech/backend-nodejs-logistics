@@ -57,7 +57,8 @@ module.exports = app => {
                   // add enteredAt timestamp to delivery
                   updateDelivery(delivery_id, {
                     status: "visited",
-                    enteredAt: data.created_at
+                    enteredAt: data.created_at,
+                    exitedAt: null
                   });
 
                   // send delivery push notification to device
