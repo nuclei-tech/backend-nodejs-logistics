@@ -4,6 +4,7 @@ const _ = require("lodash");
 
 const PushNotification = require("../models/push-notification.model");
 const pushInfo = require("../models/device-push-info.model");
+const Driver = require("../models/driver.model");
 
 // Init with push settings
 const push = new PushService({
@@ -84,6 +85,12 @@ exports.sendNotification = (device_id, payload, res) => {
               }
             );
           } else {
+            push.setOptions({
+              production: payload.production
+                ? payload.production
+                : process.env.NODE_ENV === "production"
+            });
+
             push
               .send([pushInfo.push_token], {
                 title, // REQUIRED for Android
@@ -127,5 +134,31 @@ exports.sendNotification = (device_id, payload, res) => {
 };
 
 exports.addOne = (req, res) => {
-  this.sendNotification(req.body.ids, req.body.payload, res);
+  let device_id = req.body.ids;
+
+  if (!device_id) {
+    const { driver_id } = req.body;
+
+    Driver.findOne({ driver_id })
+      .then(async driver => {
+        if (!driver) {
+          return res.status(404).send({
+            message: "Driver not found with id " + req.params.driver_id
+          });
+        }
+        this.sendNotification(driver.device_id, req.body.payload, res);
+      })
+      .catch(err => {
+        if (err.kind === "ObjectId") {
+          return res.status(404).send({
+            message: "Driver not found with id " + req.params.driver_id
+          });
+        }
+        return res.status(500).send({
+          message: "Error retrieving driver with id " + req.params.driver_id
+        });
+      });
+  } else {
+    this.sendNotification(device_id, req.body.payload, res);
+  }
 };
