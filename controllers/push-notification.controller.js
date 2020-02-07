@@ -4,7 +4,7 @@ const _ = require("lodash");
 
 const PushNotification = require("../models/push-notification.model");
 const pushInfo = require("../models/device-push-info.model");
-const Driver = require("../models/driver.model");
+const Driver = require("../models/logistics/driver.model");
 
 // Init with push settings
 const push = new PushService({
