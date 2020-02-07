@@ -8,17 +8,13 @@ const Driver = require("../models/logistics/driver.model");
 
 // Init with push settings
 const push = new PushService({
-  gcm: {
-    id: process.env.FCM_KEY
-  },
   apn: {
     token: {
       key: process.env.APN_CERT,
       keyId: process.env.APN_KEY_ID,
       teamId: process.env.APN_TEAM_ID
     },
-    production: process.env.NODE_ENV === "production",
-    isAlwaysUseFCM: true
+    production: process.env.NODE_ENV === "production"
   }
 });
 
@@ -86,9 +82,16 @@ exports.sendNotification = (device_id, payload, res) => {
             );
           } else {
             push.setOptions({
-              production: payload.production
-                ? payload.production
-                : process.env.NODE_ENV === "production"
+              apn: {
+                token: {
+                  key: process.env.APN_CERT,
+                  keyId: process.env.APN_KEY_ID,
+                  teamId: process.env.APN_TEAM_ID
+                },
+                production: payload.production
+                  ? payload.production
+                  : process.env.NODE_ENV === "production"
+              }
             });
 
             push
