@@ -10,6 +10,15 @@ module.exports = app => {
   // Retrieve a single delivery with delivery_id
   app.get("/logistics/deliveries/:delivery_id", deliveries.findOne);
 
+  // Enter delivery location with delivery_id
+  app.get(
+    "/logistics/deliveries/:delivery_id/enter",
+    deliveries.findOneAndEnter
+  );
+
+  // Exit delivery location with delivery_id
+  app.get("/logistics/deliveries/:delivery_id/exit", deliveries.findOneAndExit);
+
   // Update a single delivery with delivery_id
   app.patch("/logistics/deliveries/:delivery_id", deliveries.findOneAndUpdate);
 

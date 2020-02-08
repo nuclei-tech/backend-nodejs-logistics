@@ -4,6 +4,7 @@ var mime = require("mime-types");
 const { completeTrip } = require("../../common/trips");
 const Driver = require("../../models/logistics/driver.model");
 const Delivery = require("../../models/logistics/delivery.model");
+const pushNotification = require("../../controllers/push-notification.controller");
 
 // Retrieve and return all deliveries from the database.
 exports.findAll = (req, res) => {
@@ -53,6 +54,75 @@ exports.findOne = (req, res) => {
         message: "Error retrieving delivery with id " + req.params.delivery_id
       });
     });
+};
+
+// Enter delivery location using delivery_id
+exports.findOneAndEnter = (req, res) => {
+  const enteredAt = new Date();
+  // update DB record
+  this.updateDelivery(
+    req.params.delivery_id,
+    {
+      enteredAt,
+      exitededAt: null
+    },
+    (delivery, error) => {
+      if (error) {
+        res.status(500).send(error);
+      } else {
+        // send push notification
+        pushNotification.addOne(
+          {
+            body: {
+              driver_id: delivery.driver_id,
+              payload: {
+                status: "geofence_enter",
+                enteredAt,
+                delivery_id: req.params.delivery_id,
+                label: "Test"
+              }
+            }
+          },
+          null
+        );
+        res.send(delivery);
+      }
+    }
+  );
+};
+
+// Exit delivery location using delivery_id
+exports.findOneAndExit = (req, res) => {
+  const exitedAt = new Date();
+  // update DB record
+  this.updateDelivery(
+    req.params.delivery_id,
+    {
+      exitedAt
+    },
+    (delivery, error) => {
+      if (error) {
+        res.status(500).send(error);
+      } else {
+        // send push notification
+        pushNotification.addOne(
+          {
+            body: {
+              driver_id: delivery.driver_id,
+              payload: {
+                status: "geofence_exit",
+                exitedAt,
+                delivery_id: req.params.delivery_id,
+                label: "Test"
+              }
+            }
+          },
+          null
+        );
+        res.send(delivery);
+      }
+    }
+  );
 };
 
 // Update a delivery using delivery_id

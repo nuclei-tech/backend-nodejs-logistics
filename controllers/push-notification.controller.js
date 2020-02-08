@@ -144,7 +144,7 @@ exports.addOne = (req, res) => {
       .then(async driver => {
         if (!driver) {
           return res.status(404).send({
-            message: "Driver not found with id " + req.params.driver_id
+            message: "Driver not found with id " + req.body.driver_id
           });
         }
         this.sendNotification(driver.device_id, req.body.payload, res);
@@ -152,11 +152,11 @@ exports.addOne = (req, res) => {
       .catch(err => {
         if (err.kind === "ObjectId") {
           return res.status(404).send({
-            message: "Driver not found with id " + req.params.driver_id
+            message: "Driver not found with id " + req.body.driver_id
           });
         }
         return res.status(500).send({
-          message: "Error retrieving driver with id " + req.params.driver_id
+          message: "Error retrieving driver with id " + req.body.driver_id
         });
       });
   } else {
