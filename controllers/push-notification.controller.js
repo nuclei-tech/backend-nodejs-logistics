@@ -77,7 +77,11 @@ exports.sendNotification = (device_id, payload, res) => {
                 registrationTokens: [pushInfo.push_token]
               },
               function(err, response) {
-                res.status(201).send({ err, response });
+                if (res) {
+                  res.status(201).send({ err, response });
+                }
+
+                console.log(err, response);
               }
             );
           } else {
