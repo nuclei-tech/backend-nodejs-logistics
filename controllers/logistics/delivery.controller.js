@@ -63,6 +63,7 @@ exports.findOneAndEnter = (req, res) => {
   this.updateDelivery(
     req.params.delivery_id,
     {
+      status: "visited",
       enteredAt,
       exitededAt: null
     },
