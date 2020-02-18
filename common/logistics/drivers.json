@@ -22,5 +22,37 @@
     "token": "",
     "app_name": "com.hypertrack.logistics.ios.github",
     "platform": "ios"
+  },
+  {
+    "driver_id": "Kashyap",
+    "name": "Kashyap",
+    "device_id": "",
+    "token": "",
+    "app_name": "",
+    "platform": ""
+  },
+  {
+    "driver_id": "Denys",
+    "name": "Denys",
+    "device_id": "",
+    "token": "",
+    "app_name": "",
+    "platform": ""
+  },
+  {
+    "driver_id": "Eugene",
+    "name": "Eugene",
+    "device_id": "",
+    "token": "",
+    "app_name": "",
+    "platform": ""
+  },
+  {
+    "driver_id": "AK",
+    "name": "Alex K.",
+    "device_id": "",
+    "token": "",
+    "app_name": "",
+    "platform": ""
   }
 ]
