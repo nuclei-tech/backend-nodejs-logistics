@@ -4,26 +4,21 @@ const _ = require("lodash");
 const sampleDrivers = require("./drivers.json");
 const sampleDeliveries = require("./deliveries.json");
 
+const Driver = require("../../models/logistics/driver.model");
+const Delivery = require("../../models/logistics/delivery.model");
+
 function initLogisticsSamples() {
   // set up all sample drivers
   // note: ensure the sample JSON file has drivers with the correct device_id
   for (let i = 0; i < sampleDrivers.length; i++) {
     console.log(`Add sample driver "${sampleDrivers[i].driver_id}"...`);
-    request({
-      url: "/logistics/drivers",
-      method: "POST",
-      json: sampleDrivers[i]
-    });
+    Driver.create(sampleDrivers[i]);
   }
 
   // set up all sample deliveries
   for (let i = 0; i < sampleDeliveries.length; i++) {
     console.log(`Add sample delivery "${sampleDeliveries[i].delivery_id}"...`);
-    request({
-      url: "/logistics/deliveries",
-      method: "POST",
-      json: sampleDeliveries[i]
-    });
+    Delivery.create(sampleDeliveries[i]);
   }
 }
 
