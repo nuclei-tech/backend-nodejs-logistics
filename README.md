@@ -8,7 +8,7 @@
 ![](https://img.shields.io/david/hypertrack/backend-nodejs-logistics?style=flat-square)
 ![](https://img.shields.io/github/license/hypertrack/backend-nodejs-logistics?style=flat-square)
 
-A sample NodeJS/ExpressJS server integration with the HyperTrack platform. It consumes the HyperTrack APIs and Webhooks and exposes them through REST API endpoints and push notifications specifically for Logistics sample mobile apps ([iOS](https://github.com/hypertrack/logistics-ios)/[Android](https://github.com/hypertrack/logistics-android)).
+A sample NodeJS/ExpressJS server integration with the HyperTrack platform. It consumes HyperTrack APIs and Webhooks and exposes them through REST API endpoints and push notifications specifically for Logistics sample mobile apps ([iOS](https://github.com/hypertrack/logistics-ios)/[Android](https://github.com/hypertrack/logistics-android)).
 
 ## Features
 
