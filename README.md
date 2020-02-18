@@ -2,114 +2,63 @@
     <img src="https://www.hypertrack.com/green.eeca143346e01b96d600.svg" alt="HyperTrack logo" title="HyperTrack" align="right" height="40" />
 </a>
 
-# Sample Backend Integration
+# Logistics Backend (NodeJS)
 
-![](https://img.shields.io/circleci/build/gh/hypertrack/backend-nodejs?style=flat-square)
-![](https://img.shields.io/david/hypertrack/backend-nodejs?style=flat-square)
-![](https://img.shields.io/github/license/hypertrack/backend-nodejs?style=flat-square)
+![](https://img.shields.io/circleci/build/gh/hypertrack/backend-nodejs-logistics?style=flat-square)
+![](https://img.shields.io/david/hypertrack/backend-nodejs-logistics?style=flat-square)
+![](https://img.shields.io/github/license/hypertrack/backend-nodejs-logistics?style=flat-square)
 
-A sample NodeJS/ExpressJS server integration with the HyperTrack platform. It consumes the HyperTrack APIs and Webhooks and exposes them through REST API endpoints, Socket.io streams, and push notifications for front-end or mobile application usage.
-
-## Overview
-
-- [Sample Backend Integration](#sample-backend-integration)
-  - [Overview](#overview)
-  - [Features](#features)
-  - [Possibilities](#possibilities)
-  - [How it works](#how-it-works)
-  - [Requirements](#requirements)
-  - [Installation and setup](#installation-and-setup)
-    - [Local setup](#local-setup)
-    - [Heroku setup](#heroku-setup)
-  - [Usage](#usage)
-    - [REST API Endpoints](#rest-api-endpoints)
-    - [Webhooks](#webhooks)
-    - [Websockets](#websockets)
-    - [Push Notifications](#push-notifications)
-  - [Related](#related)
-  - [Credits](#credits)
-  - [License](#license)
+A sample NodeJS/ExpressJS server integration with the HyperTrack platform. It consumes the HyperTrack APIs and Webhooks and exposes them through REST API endpoints and push notifications specifically for Logistics sample mobile apps ([iOS](https://github.com/hypertrack/logistics-ios)/[Android](https://github.com/hypertrack/logistics-android)).
 
 ## Features
 
-- One-click deploy to Heroku (using ONLY free add-ons)
-- Synchronize all existing devices and trips on startup
-- Receive webhooks and test locally with [Localtunnel](https://github.com/localtunnel/localtunnel)
-- Store devices, trips, and all webhook records in MongoDB with Mongoose
-- Auto-complete trips 2 minutes after destination arrival
-- Notify Websocket subscribers on webhook arrival using Socket.io
+- Store drivers and deliveries in MongoDB with Mongoose
+- Receive HyperTrack Webhooks and test locally with [Localtunnel](https://github.com/localtunnel/localtunnel)
 - Send mobile device push notifications to Google's GCM and Apple's APN on webhook arrival
-- Set home and work places for devices (relevant for Placeline apps)
 
-## Possibilities
+## How to begin
 
-With the capability of this project, you can build web or mobile apps like Placeline:
+### 1. Get your keys
 
-<p align="center">
-  <img src="static/placeline.gif" />
-</p>
+- HyperTrack: [Signup](https://dashboard.hypertrack.com/signup) to get your [HyperTrack Publishable Key](https://dashboard.hypertrack.com/setup)
+- Google: For the Firebase project you created in [the app setup](https://github.com/hypertrack/logistics-android-hidden#3-set-up-firebase), enable [Google Geocoding API](https://console.cloud.google.com/marketplace/details/google/geocoding-backend.googleapis.com) and [get the API Key](https://developers.google.com/maps/documentation/geocoding/get-api-key).
 
-Examples of potential features include:
+### 2. Get MongoDB
 
-- Track all devices associated with your HyperTrack account on a world map with updates as they come in
-- Map all active trips with start/end places and geofences
-- Display all completed trips on a Placeline (time/location/activity series) and review relevant ones in more detail
-- Create expense reports with pre-filled fields such as distance traveled, travel date/time, expenses based on distance and rate, and description based on start and end places
+You need a MongoDB database for this project. To get one, you can either:
 
-## How it works
+- Install MongoDB [locally](https://docs.mongodb.com/manual/installation/)
+- Set up [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+- Set up a [Heroku account](https://signup.heroku.com/) and enable a [MongoDB add-on](https://elements.heroku.com/addons/mongolab)
 
-The project uses the Model-Routes-Controllers pattern ([read more](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/routes)) as the project structure. With that, the project structure looks like this:
-
-- **/common**: Common functionality for HyperTrack API usage
-- **/controllers**: Handlers for all routes
-- **/models**: Mongoose Schema definitions for all relevant entities
-- **/routes**: Definition of available REST API endpoints
-- **index.js**: Main entry point for ExpressJS, setup of the server (Socket.io, CORS, Mongoose), and sync of devices and trips through the HyperTrack API
-
-Once started, the project will collect and store all available devices and trips from the HyperTrack API. The Mongoose setup will ensure that missing collection definitions will be created. Once that is complete, the server will listen to HyperTrack Webhooks to come in. Every Webhook will create or update records in the database and execute related tasks (e.g. complete a trip from a trip completion webhook). Finally, Webhooks will be channeled to Websocket subscribers (if any) or to mobile apps using Push Notifications. The server will expose REST API endpoints in CRUD fashion for all available entities (trips, devices, etc).
-
-> _Note_: For the sake of simplicity, the Socket.io and REST API endpoints **do not** enforce any auth mechanisms. Before going into production, ensure to secure your server communication.
-
-## Requirements
-
-The goal of this project is to get you to a deployed integration in minutes. For this to work, you need to have:
-
-- [ ] Set up a [HyperTrack account](https://dashboard.hypertrack.com/signup) and obtain your `AccountId` and `SecretKey` from the [Dashboard](https://dashboard.hypertrack.com/)
-- [ ] Integrate the HyperTrack SDK in your mobile application ([iOS](https://github.com/hypertrack/quickstart-ios), [Android](https://github.com/hypertrack/quickstart-android), or [React Native](https://github.com/hypertrack/quickstart-react-native)) or use our sample app to send location data ([iOS](https://github.com/hypertrack/live-app-ios) or [Android](https://github.com/hypertrack/live-app-android))
-- [ ] Set up a [Heroku account](https://signup.heroku.com/) for deployment
-- [ ] (Optional) For mobile device Push Notifications: [Firebase Cloud Messaging key](https://github.com/hypertrack/quickstart-android#enable-server-to-device-communication), [APN Key ID](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_token-based_connection_to_apns), [APN authentication token signing key](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_token-based_connection_to_apns), and [Apple Developer Account Team ID](https://www.mobiloud.com/help/knowledge-base/ios-app-transfer/)
-
-## Installation and setup
-
-You can install this project on your local machine and deploy it quickly to Heroku for free.
-
-### Local setup
-
-After cloning or forking this repository, you should install all dependencies on your machine:
+### 3. Set up project
 
 ```shell
-# with npm
+# Clone this repository
+$ git clone https://github.com/hypertrack/backend-nodejs-logistics.git
+
+# cd into the project directory
+$ cd backend-nodejs-logistics
+
+# Install with npm
 npm install
 
-# or with Yarn
+# or install with Yarn
 yarn
 ```
 
-Next, you need to set your environmental variables. The project uses [dotenv](https://github.com/motdotla/dotenv), so it's best to create a `.env` file in the root folder of the project. This file is listed in `.gitignore` and shall not be checked into public repositories. Below is the content on the file - please ensure to replace the keys with your own:
+Next, you need to set your environmental variables. The project uses [dotenv](https://github.com/motdotla/dotenv), so it's best to copy the contents of the `.env.default` file in the root folder to a new `.env` file. This file is listed in `.gitignore` and shall not be checked into public repositories. Ensure to replace the keys with your own:
 
 ```shell
 # HyperTrack
 HT_ACCOUNT_ID = <YOUR_ACCOUNT_ID>
 HT_SECRET_KEY = <YOUR_SECRET_KEY>
 
-# MongoDB
-MONGODB_URI = <YOUR_MONGODB_URI>
+# Google Mamps
+GMAPS_KEY = <YOUR_GMAPS_KEY>
 
-# Optional - Push Notifications
-APN_CERT="<YOUR_APN_TOKEN_IN_P8>"
-APN_KEY_ID=<YOUR_APN_TOKEN_KEY_ID>
-APN_TEAM_ID=<YOUR_TEAM_ID>
-FCM_KEY=<YOUR_FCM_KEY>
+# MongoDB connection URL
+MONGODB_URI = <YOUR_MONGODB_URL>
 ```
 
 With the dependencies and configuration in place, you can start the server in development mode:
@@ -125,40 +74,63 @@ yarn dev
 On startup, Localtunnel is used to generate a publicly accessible URL for your local server (`https://<unqiue_id>.localtunnel.me`). A new browser window will open with your unique, temporary domain. If successful, the browser window should show:
 
 ```text
-HyperTrack Placeline Backend is RUNNING
+HyperTrack Logistics Backend is RUNNING
 ```
 
-**Congratulations!** You just completed the integration with HyperTrack APIs and Webhooks.
+### 4. Set up webhooks
 
-### Heroku setup
+[Follow the steps](https://docs.hypertrack.com/#guides-track-devices-with-the-api-stream-events-via-webhooks) to verify HyperTrack Webhooks and receive them in this project. By default, the server prints all webhook content to the console using `console.log(req.body)`. You should look for the verification webhook and open the `SubscribeURL` printed in the console to enable webhooks to come in.
 
-This project is set up to be deployed to Heroku within seconds. You need a Heroku account. All you need to do is to click on the one-click-deploy button below. It will provide the following services and add-ons:
+### 5. Set up push notifications
 
-- Web Dyno - to run the server on Heroku (free)
-- NodeJS buildpack - to run NodeJS/ExpressJS on Heroku (free)
-- MongoLab - hosted MongoDB database (free)
-- PaperTrail - hosted logging system (free)
+In order to send push notifications from the backend, you need to configure APN and FCM keys within your `.env` file:
 
-Similar to the local setup, you need to have your keys ready before the deployment. The Heroku page will ask you for the following:
-
-- `HT_ACCOUNT_ID`: Your HyperTrack AccountId from the [HyperTrack Dashboard](https://dashboard.hypertrack.com/setup)
-- `HT_SECRET_KEY`: Your HyperTrack SecretKey from the [HyperTrack Dashboard](https://dashboard.hypertrack.com/setup)
-- `FCM_KEY`: Push Notifications (optional): Your Firebase Cloud Messaging Key. [Read more here](https://github.com/hypertrack/quickstart-android#enable-server-to-device-communication)
-- `APN_KEY_ID`: Push Notifications (optional): Your Apple Push Notification (APN) Key ID. [Read more here](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_token-based_connection_to_apns)
-- `APN_CERT`: Push Notifications (optional): Your Apple Push Notification (APN) authentication token signing key. Paste \*.p8 file contents in the field. [Read more here](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_token-based_connection_to_apns)
-- `APN_TEAM_ID`: Push Notifications (optional): Your Apple Developer Account Team ID. [Read more here](https://www.mobiloud.com/help/knowledge-base/ios-app-transfer/)
+```shell
+# Push Notifications
+APN_CERT="<YOUR_P8_CONTENT_WITH_REPLACED_NEWLINES>" # iOS
+APN_KEY_ID=<YOUR_KEY_ID> # iOS
+APN_TEAM_ID=<YOUR_TEAM_ID> # iOS
+FCM_KEY=<YOUR_FCM_KEY> # Android
+```
 
 > _Note_: For `APN_CERT`, you have to use multiline variables (replace all newlines with `\n` and double quotes around the string). [Read more here](https://stackoverflow.com/a/46161404)
 
-You need to enter all of these keys for the project to run successfully. Heroku uses the input to pre-set the environmental variables for the deployment. You can change after the setup as well.
+### 6. Set up S3 storage
+
+You need an Amazon S3 bucket to enable storage of delivery pictures. To get an S3 bucket, you can either:
+
+- Set up [Amazon S3](https://aws.amazon.com/s3/)
+- Set up a [Heroku account](https://signup.heroku.com/) and enable an [S3 add-on](https://elements.heroku.com/addons/bucketeer)
+
+Finally, you should set varibales in your `.env` file to configure S3 file storage appropriately:
+
+```shell
+# Bucketeer
+BUCKETEER_BUCKET_NAME=<YOUR_BUCKET_NAME>
+BUCKETEER_AWS_SECRET_ACCESS_KEY=<YOUR_BUCKET_ACCESS_KEY>
+BUCKETEER_AWS_REGION=<YOUR_REGION>
+BUCKETEER_AWS_ACCESS_KEY_ID=<YOUR_BUCKET_ACCESS_KEY_ID>
+```
+
+## Deploying on Heroku
+
+This project is set up to be deployed to Heroku within seconds. Create or log in to your existing Heroku account and click on the one-click-deploy button below. It will provide the following services and add-ons:
+
+- Web Dyno - to run the server on Heroku
+- NodeJS buildpack - to run NodeJS/ExpressJS on Heroku
+- MongoLab - hosted MongoDB database
+- PaperTrail - hosted logging system
+- Bucketeer - S3 file hosting
+
+Similar to the local setup, you need to have your keys ready before the deployment. The Heroku page will ask you for all the keys stored in your `.env` file.
 
 **Deploy this project now on Heroku:**
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/hypertrack/backend-nodejs)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/hypertrack/backend-nodejs-logistics)
 
 ## Usage
 
-The project exposes all devices and trip data through a variety of interfaces. Below is an explanation of each interface, setup steps, and usage details.
+The project exposes data through REST API endpoints and push notifications and consumes data through REST APIs and Webhooks. Below is an explanation of each interface, setup steps, and usage details.
 
 ### REST API Endpoints
 
@@ -212,33 +184,6 @@ With the deployment of this project, you will have an endpoint listening to inco
 All webhooks will be processed and stored to the MongoDB. Some updates might update other database records (e.g. battery status update reflected in device records). It is important to note that `destination_arrival` [trip webhooks](https://docs.hypertrack.com/#trip-payload) will trigger [trip completion API calls](https://docs.hypertrack.com/#complete-trip) two minutes after the webhook arrival. You can change this behavior by modifying the `routes/webhook.route.js` file.
 
 > _Note_: You can look into the console logs to review all received webhooks. This also allows you to run through the one-time verification for HyperTrack Webhooks.
-
-### Websockets
-
-The project uses [socket.io](https://github.com/socketio/socket.io) as ExpressJS middleware. A connection is opened by default when the project is started up.
-
-> _Note_: The connection is unsecured by default. It's highly recommended to add an auth layer before going to production.
-
-With this middleware, the `io` instance is attached to every handler in the response object. This is used in the `/hypertrack` webhook handler to notify subscribed clients. Events are being emitted using the [webhook type](https://docs.hypertrack.com/#webhook) as event name (one of `location`, `device_status`, `battery` or `trip`) and the entire webhook payload as event payload.
-
-To subscribe to events triggered by webhooks, you can use the [socket.io-client](https://github.com/socketio/socket.io-client) project. You will need the server URL to connect appropriately. It is recommended to update the package.json configuration for the `dev` script to set a unqiue Localtunnel URL when testing locally): `lt --subdomain <alias> --port 8080 --open`. Here's a sample socket subscription:
-
-```html
-<script src="/socket.io/socket.io.js"></script>
-<script>
-  var socket = io(<SERVER_URL>);
-  socket.on('connect', function(){
-      console.log("Connected to server ...")
-  });
-  // listen to one of: location, device_status, battery or trip
-  socket.on('location', function(data){
-      console.log("Location data received: ", data)
-  });
-  socket.on('disconnect', function(){
-      console.log("Disconnected from server ...")
-  });
-</script>
-```
 
 ### Push Notifications
 
@@ -368,9 +313,19 @@ The notification payload is generated by the package [node-pushnotifications](ht
 </p>
 </details>
 
-## Related
+## Documentation
 
-This backend integration is built to be work seamlessly with the [Placeline web app](https://github.com/hypertrack/placeline-nextjs) and the [Placeline scheduler](https://github.com/hypertrack/sample-scheduler-rabbitmq).
+For detailed documentation of the APIs, customizations and what all you can build using HyperTrack, please visit the official [docs](https://docs.hypertrack.com).
+
+## Contribute
+
+Feel free to clone, use, and contribute back via [pull requests](https://help.github.com/articles/about-pull-requests/). We'd love to see your pull requests - send them in! Please use the [issues tracker](https://github.com/hypertrack/backend-nodejs-logistics/issues) to raise bug reports and feature requests.
+
+We are excited to see what live location feature you build in your app using this project. Do ping us at help@hypertrack.com once you build one, and we would love to feature your app on our blog!
+
+## Support
+
+Join our [Slack community](https://join.slack.com/t/hypertracksupport/shared_invite/enQtNDA0MDYxMzY1MDMxLTdmNDQ1ZDA1MTQxOTU2NTgwZTNiMzUyZDk0OThlMmJkNmE0ZGI2NGY2ZGRhYjY0Yzc0NTJlZWY2ZmE5ZTA2NjI) for instant responses. You can also email us at help@hypertrack.com.
 
 ## Credits
 
@@ -386,7 +341,3 @@ This project uses the following open-source packages:
 - [nodemon](https://github.com/remy/nodemon): Monitor for any changes in your node.js application and automatically restart the server
 - [request](https://github.com/request/request): Simplified HTTP client
 - [socket.io](https://github.com/socketio/socket.io): Realtime application framework
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
