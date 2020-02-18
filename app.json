@@ -24,23 +24,19 @@
     },
     "FCM_KEY": {
       "description": "Push Notifications: Your Firebase Cloud Messaging Key",
-      "value": "",
-      "required": false
+      "value": ""
     },
     "APN_KEY_ID": {
       "description": "Push Notifications: Your Apple Push Notification (APN) Key ID",
-      "value": "",
-      "required": false
+      "value": ""
     },
     "APN_CERT": {
       "description": "Push Notifications: Your Apple Push Notification (APN) authentication token signing key. Paste *.p8 file contents (untouched, with new lines) in the field",
-      "value": "",
-      "required": false
+      "value": ""
     },
     "APN_TEAM_ID": {
       "description": "Push Notifications: Your Apple Developer account Team ID",
-      "value": "",
-      "required": false
+      "value": ""
     }
   },
   "repository": "https://github.com/hypertrack/backend-nodejs-logistics",
