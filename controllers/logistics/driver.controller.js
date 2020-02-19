@@ -168,11 +168,16 @@ exports.findOneAndCheckin = (req, res) => {
           for (let i = 0; i < driver.deliveries.length; i++) {
             const delivery = driver.deliveries[i];
 
-            const geoResp = await geocoder.geocode({
-              address: delivery.address.street,
-              country: delivery.address.country,
-              zipcode: delivery.address.postalCode
-            });
+            const geoResp = await geocoder.geocode(
+              {
+                address: delivery.address.street,
+                country: delivery.address.country,
+                zipcode: delivery.address.postalCode
+              },
+              function(err, res) {
+                console.log("GEOCODING RESPONSE: ", err, res);
+              }
+            );
 
             if (geoResp.length > 0) {
               tripBody.geofences.push({

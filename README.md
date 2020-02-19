@@ -23,6 +23,8 @@ A sample NodeJS/ExpressJS server integration with the HyperTrack platform. It co
 - HyperTrack: [Signup](https://dashboard.hypertrack.com/signup) to get your [HyperTrack Publishable Key](https://dashboard.hypertrack.com/setup)
 - Google: For the Firebase project you created in [the app setup](https://github.com/hypertrack/logistics-android-hidden#3-set-up-firebase), enable [Google Geocoding API](https://console.cloud.google.com/marketplace/details/google/geocoding-backend.googleapis.com) and [get the API Key](https://developers.google.com/maps/documentation/geocoding/get-api-key).
 
+> Note: Make sure to [enable billing](https://developers.google.com/maps/documentation/geocoding/usage-and-billing) for your GCP project. Otherwise, the Google Geocoding API will return errors.
+
 ### 2. Get MongoDB
 
 You need a MongoDB database for this project. To get one, you can either:
