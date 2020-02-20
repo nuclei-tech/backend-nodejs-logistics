@@ -18,10 +18,6 @@
       "description": "Your HyperTrack SecretKey from https://dashboard.hypertrack.com/setup",
       "value": ""
     },
-    "GMAPS_KEY": {
-      "description": "Your Google Maps API Key with Geocoding API enabled",
-      "value": ""
-    },
     "FCM_KEY": {
       "description": "Push Notifications: Your Firebase Cloud Messaging Key",
       "value": ""

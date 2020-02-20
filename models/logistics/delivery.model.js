@@ -22,20 +22,22 @@ const DeliverySchema = new mongoose.Schema(
     },
     address: {
       street: {
-        type: String,
-        required: true
+        type: String
       },
       postalCode: {
-        type: String,
-        required: true
+        type: String
       },
       city: {
-        type: String,
-        required: true
+        type: String
       },
       country: {
-        type: String,
-        required: true
+        type: String
+      },
+      latitude: {
+        type: Number
+      },
+      longitude: {
+        type: Number
       }
     },
     customerNote: {

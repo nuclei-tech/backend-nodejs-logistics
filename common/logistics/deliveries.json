@@ -8,7 +8,9 @@
       "street": "252 Geary Blvd",
       "postalCode": "94108",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.787639,
+      "longitude": -122.4074808
     },
     "customerNote": "Leave at the Macy's support desk",
     "items": [
@@ -33,7 +35,9 @@
       "street": "353 Sacramento Str",
       "postalCode": "94111",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7940981,
+      "longitude": -122.3996401
     },
     "customerNote": "Leave at the reception on floor 8th",
     "items": [
@@ -58,7 +62,9 @@
       "street": "555 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7899845,
+      "longitude": -122.3998704
     },
     "customerNote": "Ring my phone so I can pick it up: 4155109422",
     "items": [
@@ -83,14 +89,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -102,7 +106,9 @@
       "street": "353 Sacramento Str",
       "postalCode": "94111",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7940981,
+      "longitude": -122.3996401
     },
     "customerNote": "Leave at the reception on floor 8th",
     "items": [
@@ -127,7 +133,9 @@
       "street": "555 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7899845,
+      "longitude": -122.3998704
     },
     "customerNote": "Ring my phone so I can pick it up: 4155109422",
     "items": [
@@ -152,14 +160,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -171,7 +177,9 @@
       "street": "353 Sacramento Str",
       "postalCode": "94111",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7940981,
+      "longitude": -122.3996401
     },
     "customerNote": "Leave at the reception on floor 8th",
     "items": [
@@ -196,7 +204,9 @@
       "street": "555 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7899845,
+      "longitude": -122.3998704
     },
     "customerNote": "Ring my phone so I can pick it up: 4155109422",
     "items": [
@@ -221,14 +231,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -241,14 +249,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -262,14 +268,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -284,14 +288,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -304,14 +306,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -325,14 +325,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -347,14 +345,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -367,14 +363,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -388,14 +382,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -410,14 +402,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -429,7 +419,9 @@
       "street": "252 Geary Blvd",
       "postalCode": "94108",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.787639,
+      "longitude": -122.4074808
     },
     "customerNote": "Leave at the Macy's support desk",
     "items": [
@@ -454,7 +446,9 @@
       "street": "353 Sacramento Str",
       "postalCode": "94111",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7940981,
+      "longitude": -122.3996401
     },
     "customerNote": "Leave at the reception on floor 8th",
     "items": [
@@ -479,7 +473,9 @@
       "street": "555 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7899845,
+      "longitude": -122.3998704
     },
     "customerNote": "Ring my phone so I can pick it up: 4155109422",
     "items": [
@@ -504,14 +500,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -524,14 +518,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -545,14 +537,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -567,14 +557,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -586,7 +574,9 @@
       "street": "252 Geary Blvd",
       "postalCode": "94108",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.787639,
+      "longitude": -122.4074808
     },
     "customerNote": "Leave at the Macy's support desk",
     "items": [
@@ -611,7 +601,9 @@
       "street": "353 Sacramento Str",
       "postalCode": "94111",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7940981,
+      "longitude": -122.3996401
     },
     "customerNote": "Leave at the reception on floor 8th",
     "items": [
@@ -636,7 +628,9 @@
       "street": "555 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7899845,
+      "longitude": -122.3998704
     },
     "customerNote": "Ring my phone so I can pick it up: 4155109422",
     "items": [
@@ -661,14 +655,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -681,14 +673,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -702,14 +692,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -724,14 +712,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -743,7 +729,9 @@
       "street": "252 Geary Blvd",
       "postalCode": "94108",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.787639,
+      "longitude": -122.4074808
     },
     "customerNote": "Leave at the Macy's support desk",
     "items": [
@@ -768,7 +756,9 @@
       "street": "353 Sacramento Str",
       "postalCode": "94111",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7940981,
+      "longitude": -122.3996401
     },
     "customerNote": "Leave at the reception on floor 8th",
     "items": [
@@ -793,7 +783,9 @@
       "street": "555 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7899845,
+      "longitude": -122.3998704
     },
     "customerNote": "Ring my phone so I can pick it up: 4155109422",
     "items": [
@@ -818,14 +810,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -838,14 +828,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -859,14 +847,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -881,14 +867,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -900,7 +884,9 @@
       "street": "252 Geary Blvd",
       "postalCode": "94108",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.787639,
+      "longitude": -122.4074808
     },
     "customerNote": "Leave at the Macy's support desk",
     "items": [
@@ -925,7 +911,9 @@
       "street": "353 Sacramento Str",
       "postalCode": "94111",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7940981,
+      "longitude": -122.3996401
     },
     "customerNote": "Leave at the reception on floor 8th",
     "items": [
@@ -950,7 +938,9 @@
       "street": "555 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7899845,
+      "longitude": -122.3998704
     },
     "customerNote": "Ring my phone so I can pick it up: 4155109422",
     "items": [
@@ -975,14 +965,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -995,14 +983,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -1016,14 +1002,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   },
   {
@@ -1038,14 +1022,12 @@
       "street": "1 Market Str",
       "postalCode": "94105",
       "city": "San Francisco",
-      "country": "USA"
+      "country": "USA",
+      "latitude": 37.7941585,
+      "longitude": -122.3947916
     },
     "items": [
-      {
-        "item_id": "HJK",
-        "item_label": "BestBuy",
-        "item_sku": "283SJKCRJ385"
-      }
+      { "item_id": "HJK", "item_label": "BestBuy", "item_sku": "283SJKCRJ385" }
     ]
   }
 ]

@@ -1,5 +1,3 @@
-var NodeGeocoder = require("node-geocoder");
-
 const { createTrip, completeTrip } = require("../../common/trips");
 const {
   findOneAndUpdate
@@ -158,42 +156,26 @@ exports.findOneAndCheckin = (req, res) => {
             geofences: []
           };
 
-          // convert address to lat/lng for each trip
-          const geocoder = NodeGeocoder({
-            provider: "google",
-            apiKey: process.env.GMAPS_KEY,
-            formatter: null
-          });
-
+          // add delivery lat/lng as geofences for HyperTrack Trip
           for (let i = 0; i < driver.deliveries.length; i++) {
             const delivery = driver.deliveries[i];
 
-            const geoResp = await geocoder.geocode(
-              {
-                address: delivery.address.street,
-                country: delivery.address.country,
-                zipcode: delivery.address.postalCode
+            tripBody.geofences.push({
+              geometry: {
+                type: "Point",
+                coordinates: [
+                  delivery.address.longitude,
+                  delivery.address.latitude
+                ]
               },
-              function(err, res) {
-                console.log("GEOCODING RESPONSE: ", err, res);
+              radius: 100,
+              metadata: {
+                delivery_id: delivery.delivery_id,
+                label: delivery.label
+                // note could be too long for metadata
+                // customerNote: delivery.customerNote
               }
-            );
-
-            if (geoResp.length > 0) {
-              tripBody.geofences.push({
-                geometry: {
-                  type: "Point",
-                  coordinates: [geoResp[0].longitude, geoResp[0].latitude]
-                },
-                radius: 100,
-                metadata: {
-                  delivery_id: delivery.delivery_id,
-                  label: delivery.label
-                  // note could be too long for metadata
-                  // customerNote: delivery.customerNote
-                }
-              });
-            }
+            });
           }
 
           createTrip(tripBody, async (newTrip, error) => {

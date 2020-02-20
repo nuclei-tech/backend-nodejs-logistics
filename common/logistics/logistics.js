@@ -1,6 +1,4 @@
 require("dotenv").config();
-const request = require("request");
-const _ = require("lodash");
 const sampleDrivers = require("./drivers.json");
 const sampleDeliveries = require("./deliveries.json");
 
