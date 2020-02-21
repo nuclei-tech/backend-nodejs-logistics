@@ -142,7 +142,7 @@ exports.findOneAndUploadImage = (req, res) => {
   const baseURL = req.protocol + "://" + req.get("host");
   const fileName = path.join(
     __dirname,
-    `../../public/${uuidv4()}.${mime.extension(req.headers["content-type"])}`
+    `../../../public/${uuidv4()}.${mime.extension(req.headers["content-type"])}`
   );
 
   var data = new Buffer(req.body);

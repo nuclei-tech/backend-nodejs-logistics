@@ -16,7 +16,22 @@ A sample NodeJS/ExpressJS server integration with the HyperTrack platform. It co
 - Receive HyperTrack Webhooks and test locally with [Localtunnel](https://github.com/localtunnel/localtunnel)
 - Send mobile device push notifications to Google's GCM and Apple's APN on webhook arrival
 
-## How to begin
+# How to deploy on Heroku
+
+This project is set up to be deployed to Heroku within seconds. Create or log in to your existing Heroku account and click on the one-click-deploy button below. It will provide the following services and add-ons:
+
+- Web Dyno - to run the server on Heroku
+- NodeJS buildpack - to run NodeJS/ExpressJS on Heroku
+- MongoLab - hosted MongoDB database
+- PaperTrail - hosted logging system
+
+Similar to the local setup, you need to have your keys ready before the deployment. The Heroku page will ask you for all the keys stored in your `.env` file.
+
+**Deploy this project now on Heroku:**
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/hypertrack/backend-nodejs-logistics)
+
+## How to run locally
 
 ### 1. Get your keys
 
@@ -97,21 +112,6 @@ FCM_KEY=<YOUR_FCM_KEY> # Android
 ```
 
 > _Note_: For `APN_CERT`, you have to use multiline variables (replace all newlines with `\n` and double quotes around the string). [Read more here](https://stackoverflow.com/a/46161404)
-
-## How to deploy on Heroku
-
-This project is set up to be deployed to Heroku within seconds. Create or log in to your existing Heroku account and click on the one-click-deploy button below. It will provide the following services and add-ons:
-
-- Web Dyno - to run the server on Heroku
-- NodeJS buildpack - to run NodeJS/ExpressJS on Heroku
-- MongoLab - hosted MongoDB database
-- PaperTrail - hosted logging system
-
-Similar to the local setup, you need to have your keys ready before the deployment. The Heroku page will ask you for all the keys stored in your `.env` file.
-
-**Deploy this project now on Heroku:**
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/hypertrack/backend-nodejs-logistics)
 
 ## Documentation
 
