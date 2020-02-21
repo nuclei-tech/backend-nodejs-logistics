@@ -12,9 +12,9 @@ A sample NodeJS/ExpressJS server integration with the HyperTrack platform. It co
 
 ## Features
 
-- Store drivers and deliveries in MongoDB with Mongoose
-- Receive HyperTrack Webhooks and test locally with [Localtunnel](https://github.com/localtunnel/localtunnel)
-- Send mobile device push notifications to Google's GCM and Apple's APN on webhook arrival
+- Store drivers and deliveries in MongoDB
+- Receive HyperTrack Webhooks
+- Send mobile device push notifications on webhook arrival
 
 # How to deploy on Heroku
 
