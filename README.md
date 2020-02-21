@@ -76,18 +76,3 @@ We are excited to see what live location feature you build in your app using thi
 ## Support
 
 Join our [Slack community](https://join.slack.com/t/hypertracksupport/shared_invite/enQtNDA0MDYxMzY1MDMxLTdmNDQ1ZDA1MTQxOTU2NTgwZTNiMzUyZDk0OThlMmJkNmE0ZGI2NGY2ZGRhYjY0Yzc0NTJlZWY2ZmE5ZTA2NjI) for instant responses. You can also email us at help@hypertrack.com.
-
-## Credits
-
-This project uses the following open-source packages:
-
-- [body-parser](https://github.com/expressjs/body-parser): Node.js body parsing middleware
-- [cors](https://expressjs.com/en/resources/middleware/cors.html): Node.js CORS middleware
-- [dotenv](https://github.com/motdotla/dotenv): Load environment variables from .env files
-- [express](https://expressjs.com/): Web framework for Node.js
-- [localtunnel](https://github.com/localtunnel/localtunnel): Expose your localhost to the world for testing and sharing
-- [mongoose](https://mongoosejs.com/): Mongodb object modeling for node.js
-- [node-pushnotifications](https://github.com/appfeel/node-pushnotifications): Push notifications for GCM, APNS, MPNS, AMZ
-- [nodemon](https://github.com/remy/nodemon): Monitor for any changes in your node.js application and automatically restart the server
-- [request](https://github.com/request/request): Simplified HTTP client
-- [socket.io](https://github.com/socketio/socket.io): Realtime application framework
