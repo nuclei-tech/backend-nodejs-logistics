@@ -12,7 +12,7 @@ A sample NodeJS/ExpressJS server integration with the HyperTrack platform. It co
 
 ## Features
 
-- Store drivers and deliveries in MongoDB
+- Store drivers and deliveries
 - Receive HyperTrack Webhooks
 - Send mobile device push notifications on webhook arrival
 
