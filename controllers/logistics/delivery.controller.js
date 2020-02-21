@@ -140,14 +140,12 @@ exports.findOneAndUpdate = (req, res) => {
 
 exports.findOneAndUploadImage = (req, res) => {
   const baseURL = req.protocol + "://" + req.get("host");
-  const fileName = path.join(
-    __dirname,
-    `../../static/${uuidv4()}.${mime.extension(req.headers["content-type"])}`
-  );
+  const fileName = `${uuidv4()}.${mime.extension(req.headers["content-type"])}`;
+  const fileDir = path.join(__dirname, `../../public/${fileName}`);
 
   var data = new Buffer(req.body);
 
-  fs.writeFile(fileName, data, err => {
+  fs.writeFile(fileDir, data, err => {
     if (err) {
       console.log("Error uploading file: ", err);
       res.status(500).send(err);
@@ -156,9 +154,7 @@ exports.findOneAndUploadImage = (req, res) => {
       this.updateDelivery(
         req.params.delivery_id,
         {
-          deliveryPicture: `${baseURL}/static/${uuidv4()}.${mime.extension(
-            req.headers["content-type"]
-          )}`
+          deliveryPicture: `${baseURL}/public/${fileName}`
         },
         (delivery, error) => {
           if (error) {
