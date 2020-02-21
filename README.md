@@ -18,6 +18,14 @@ A sample NodeJS/ExpressJS server integration with the HyperTrack platform. It co
 
 # How to deploy on Heroku
 
+### 1. Get your keys
+
+- HyperTrack: [Signup](https://dashboard.hypertrack.com/signup) to get your [HyperTrack Publishable Key](https://dashboard.hypertrack.com/setup)
+- For iOS push notifications, [Apple Push Notification service keys](https://github.com/hypertrack/quickstart-ios#setup-silent-push-notifications)
+- For Android push notifications, [Firebase Cloud Messaging keys](https://github.com/hypertrack/quickstart-android#set-up-silent-push-notifications)
+
+### 2. Use Heroku One-Click Deploy
+
 This project is set up to be deployed to Heroku within seconds. Create or log in to your existing Heroku account and click on the one-click-deploy button below. It will provide the following services and add-ons:
 
 - Web Dyno - to run the server on Heroku
@@ -25,11 +33,35 @@ This project is set up to be deployed to Heroku within seconds. Create or log in
 - MongoLab - hosted MongoDB database
 - PaperTrail - hosted logging system
 
-Similar to the local setup, you need to have your keys ready before the deployment. The Heroku page will ask you for all the keys stored in your `.env` file.
+You need to have your keys ready for the deployment. The Heroku page will ask you for all these keys:
+- HyperTrack:
+    - HT_ACCOUNT_ID = HyperTrack Account ID
+    - HT_SECRET_KEY = HyperTrack Secret Key
+- Push Notifications:
+    - APN_CERT: (iOS) APN certification (p9 file content)
+    - APN_KEY_ID: (iOS) APN Key ID
+    - APN_TEAM_ID: (iOS) APN Team ID
+    - FCM_KEY: (Android) FCN Key
 
 **Deploy this project now on Heroku:**
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/hypertrack/backend-nodejs-logistics)
+
+As soon as the deployment is completed, you can view the app and within a new browser window you should see a confirmation to indicate that your backend is up and running successfully:
+```text
+HyperTrack Logistics Backend is RUNNING
+```
+
+### 3. Set up webhooks
+
+[Follow the steps](https://docs.hypertrack.com/#guides-track-devices-with-the-api-stream-events-via-webhooks) to verify HyperTrack Webhooks and receive them in this project. The webhook receiver endpoint is `/hypertrack`, so your Webhook URL should be:
+
+```shell
+# unique id can be configured in the package.json
+https://<your_heroku_app_name>.herokuapp.com//hypertrack
+```
+
+By default, the server prints all webhook content to the console using `console.log(req.body)`. You should look for the verification webhook and open the `SubscribeURL` printed in the console to enable webhooks to come in.
 
 ## How to run locally
 
