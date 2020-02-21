@@ -148,6 +148,7 @@ exports.findOneAndUploadImage = (req, res) => {
   fs.writeFile(fileName, data, err => {
     if (err) {
       console.log("Error uploading file: ", err);
+      res.status(500).send(err);
     } else {
       // update delivery
       this.updateDelivery(
