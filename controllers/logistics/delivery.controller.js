@@ -155,7 +155,11 @@ exports.findOneAndUploadImage = (req, res) => {
       // update delivery
       this.updateDelivery(
         req.params.delivery_id,
-        { deliveryPicture: `${baseURL}/${fileName}` },
+        {
+          deliveryPicture: `${baseURL}/static/${uuidv4()}.${mime.extension(
+            req.headers["content-type"]
+          )}`
+        },
         (delivery, error) => {
           if (error) {
             res.status(500).send(error);
