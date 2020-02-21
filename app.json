@@ -3,7 +3,7 @@
   "website": "https://www.hypertrack.com/",
   "success_url": "/",
   "description": "HyperTrack NodeJS server integration for Logistics apps",
-  "addons": ["mongolab:sandbox", "papertrail:choklad", "bucketeer:hobbyist"],
+  "addons": ["mongolab:sandbox", "papertrail:choklad"],
   "buildpacks": [
     {
       "url": "heroku/nodejs"
@@ -44,8 +44,6 @@
     "integration",
     "mongodb",
     "mongoose",
-    "bucketeer",
-    "aws-s3",
     "heroku"
   ]
 }

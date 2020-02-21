@@ -98,23 +98,6 @@ FCM_KEY=<YOUR_FCM_KEY> # Android
 
 > _Note_: For `APN_CERT`, you have to use multiline variables (replace all newlines with `\n` and double quotes around the string). [Read more here](https://stackoverflow.com/a/46161404)
 
-### 6. Set up S3 storage
-
-You need an Amazon S3 bucket to enable storage of delivery pictures. To get an S3 bucket, you can either:
-
-- Set up [Amazon S3](https://aws.amazon.com/s3/)
-- Set up a [Heroku account](https://signup.heroku.com/) and enable an [S3 add-on](https://elements.heroku.com/addons/bucketeer)
-
-Finally, you should set varibales in your `.env` file to configure S3 file storage appropriately:
-
-```shell
-# Bucketeer
-BUCKETEER_BUCKET_NAME=<YOUR_BUCKET_NAME>
-BUCKETEER_AWS_SECRET_ACCESS_KEY=<YOUR_BUCKET_ACCESS_KEY>
-BUCKETEER_AWS_REGION=<YOUR_REGION>
-BUCKETEER_AWS_ACCESS_KEY_ID=<YOUR_BUCKET_ACCESS_KEY_ID>
-```
-
 ## How to deploy on Heroku
 
 This project is set up to be deployed to Heroku within seconds. Create or log in to your existing Heroku account and click on the one-click-deploy button below. It will provide the following services and add-ons:
@@ -123,7 +106,6 @@ This project is set up to be deployed to Heroku within seconds. Create or log in
 - NodeJS buildpack - to run NodeJS/ExpressJS on Heroku
 - MongoLab - hosted MongoDB database
 - PaperTrail - hosted logging system
-- Bucketeer - S3 file hosting
 
 Similar to the local setup, you need to have your keys ready before the deployment. The Heroku page will ask you for all the keys stored in your `.env` file.
 

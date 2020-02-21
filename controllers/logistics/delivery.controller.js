@@ -1,6 +1,6 @@
-const aws = require("aws-sdk");
 const uuidv4 = require("uuid/v4");
 var mime = require("mime-types");
+const fs = require("fs");
 const { completeTrip } = require("../../common/trips");
 const Driver = require("../../models/logistics/driver.model");
 const Delivery = require("../../models/logistics/delivery.model");
@@ -138,36 +138,21 @@ exports.findOneAndUpdate = (req, res) => {
 };
 
 exports.findOneAndUploadImage = (req, res) => {
-  // upload to s3
-  const s3 = new aws.S3({
-    accessKeyId: process.env.BUCKETEER_AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.BUCKETEER_AWS_SECRET_ACCESS_KEY,
-    region: process.env.BUCKETEER_AWS_REGION
-  });
+  const baseURL = req.protocol + "://" + req.get("host");
+  const fileName = `public/${uuidv4()}.${mime.extension(
+    req.headers["content-type"]
+  )}`;
 
-  const s3Params = {
-    Bucket: process.env.BUCKETEER_BUCKET_NAME,
-    ContentType: req.headers["content-type"],
-    ACL: "public-read",
-    Body: req.body,
-    Key: `${uuidv4()}.${mime.extension(req.headers["content-type"])}`
-  };
+  var data = new Buffer(req.body);
 
-  s3.upload(s3Params, (s3Err, data) => {
-    if (s3Err) {
-      console.log(`File uploaded failed: ${s3Err}`);
-
-      res.status(500).send({
-        status: "failed",
-        reason: s3Err
-      });
+  fs.writeFile(fileName, data, err => {
+    if (err) {
+      console.log("Error uploading file");
     } else {
-      console.log(`File uploaded successfully at ${data.Location}`);
-
       // update delivery
       this.updateDelivery(
         req.params.delivery_id,
-        { deliveryPicture: data.Location },
+        { deliveryPicture: `${baseURL}/${fileName}` },
         (delivery, error) => {
           if (error) {
             res.status(500).send(error);

@@ -1,4 +1,5 @@
 require("dotenv").config();
+var express = require("express");
 var app = require("express")();
 var http = require("http").createServer(app);
 var io = require("socket.io")(http);
@@ -33,6 +34,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.text({ limit: "50mb", type: "text/plain" }));
 app.use(bodyParser.raw({ limit: "50mb", type: "application/binary" }));
 app.use(cors());
+
+// enable public file access for uploads
+app.use("/public", express.static(__dirname + "/public"));
 
 // setup socket.io
 app.use(function(req, res, next) {
