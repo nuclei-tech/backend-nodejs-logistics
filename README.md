@@ -57,8 +57,8 @@ HyperTrack Logistics Backend is RUNNING
 [Follow the steps](https://docs.hypertrack.com/#guides-track-devices-with-the-api-stream-events-via-webhooks) to verify HyperTrack Webhooks and receive them in this project. The webhook receiver endpoint is `/hypertrack`, so your Webhook URL should be:
 
 ```shell
-# unique id can be configured in the package.json
-https://<your_heroku_app_name>.herokuapp.com//hypertrack
+# app name you entered on the deployment screen
+https://<your_heroku_app_name>.herokuapp.com/hypertrack
 ```
 
 By default, the server prints all webhook content to the console using `console.log(req.body)`. You should look for the verification webhook and open the `SubscribeURL` printed in the console to enable webhooks to come in.
