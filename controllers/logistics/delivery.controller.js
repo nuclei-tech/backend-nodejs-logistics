@@ -1,5 +1,6 @@
 const uuidv4 = require("uuid/v4");
-var mime = require("mime-types");
+const mime = require("mime-types");
+const path = require("path");
 const fs = require("fs");
 const { completeTrip } = require("../../common/trips");
 const Driver = require("../../models/logistics/driver.model");
@@ -139,9 +140,10 @@ exports.findOneAndUpdate = (req, res) => {
 
 exports.findOneAndUploadImage = (req, res) => {
   const baseURL = req.protocol + "://" + req.get("host");
-  const fileName = `${__dirname}/public/${uuidv4()}.${mime.extension(
-    req.headers["content-type"]
-  )}`;
+  const fileName = path.join(
+    __dirname,
+    `../public/${uuidv4()}.${mime.extension(req.headers["content-type"])}`
+  );
 
   var data = new Buffer(req.body);
 
