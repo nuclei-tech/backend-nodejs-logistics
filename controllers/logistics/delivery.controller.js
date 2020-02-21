@@ -139,7 +139,7 @@ exports.findOneAndUpdate = (req, res) => {
 
 exports.findOneAndUploadImage = (req, res) => {
   const baseURL = req.protocol + "://" + req.get("host");
-  const fileName = `public/${uuidv4()}.${mime.extension(
+  const fileName = `${__dirname}/public/${uuidv4()}.${mime.extension(
     req.headers["content-type"]
   )}`;
 
@@ -147,7 +147,7 @@ exports.findOneAndUploadImage = (req, res) => {
 
   fs.writeFile(fileName, data, err => {
     if (err) {
-      console.log("Error uploading file");
+      console.log("Error uploading file: ", err);
     } else {
       // update delivery
       this.updateDelivery(
