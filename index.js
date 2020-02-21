@@ -36,7 +36,7 @@ app.use(bodyParser.raw({ limit: "50mb", type: "application/binary" }));
 app.use(cors());
 
 // enable public file access for uploads
-app.use("/public", express.static(__dirname + "/public"));
+app.use("/static", express.static(__dirname + "/static"));
 
 // setup socket.io
 app.use(function(req, res, next) {
