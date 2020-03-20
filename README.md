@@ -54,7 +54,7 @@ HyperTrack Logistics Backend is RUNNING
 
 ### 3. Set up webhooks
 
-[Follow the steps](https://docs.hypertrack.com/#guides-track-devices-with-the-api-stream-events-via-webhooks) to verify HyperTrack Webhooks and receive them in this project. The webhook receiver endpoint is `/hypertrack`, so your Webhook URL should be:
+[Follow the steps](https://www.hypertrack.com/docs/guides/track-devices-with-api#stream-events-via-webhooks) to verify HyperTrack Webhooks and receive them in this project. The webhook receiver endpoint is `/hypertrack`, so your Webhook URL should be:
 
 ```shell
 # app name you entered on the deployment screen
@@ -65,7 +65,7 @@ By default, the server prints all webhook content to the console using `console.
 
 ## Documentation
 
-For detailed documentation of the APIs, customizations and what all you can build using HyperTrack, please visit the official [docs](https://docs.hypertrack.com).
+For detailed documentation of the APIs, customizations and what all you can build using HyperTrack, please visit the official [docs](https://www.hypertrack.com/docs/).
 
 ## Contribute
 
